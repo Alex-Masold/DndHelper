@@ -7,6 +7,10 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
+using DndHelper.View;
+using System.Windows.Controls.Primitives;
 
 namespace DndHelper.ViewModel
 {
@@ -30,7 +34,7 @@ namespace DndHelper.ViewModel
             set
             {
                 searchCharacterString = value;
-                OnPropertyChanged(nameof(searchCharacterString));
+                OnPropertyChanged(nameof(SearchCharacterString));
                 Search();
             }
         }
@@ -63,8 +67,90 @@ namespace DndHelper.ViewModel
                     );
             }
         }
-
+        
         public ObservableCollection<Character> Characters { get; set; }
+
+        private RelayCommand addCharacterCommand;
+        public RelayCommand AddCharacterCommand
+        {
+            get
+            {
+                return addCharacterCommand ??
+                    (addCharacterCommand = new RelayCommand(obj =>
+                    {
+                        //Character character = new Character();
+                        //Characters.Add(character);
+                        //SelectedCharacter = character;
+                        // Создайте экземпляр ViewModel для окна создания персонажа
+                        CreateCharacterViewModel createCharacterViewModel = new CreateCharacterViewModel();
+
+                        // Создайте окно и установите DataContext
+                        CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow
+                        {
+                            DataContext = createCharacterViewModel
+                        };
+
+                        // Установите текущее окно в качестве владельца
+                        createCharacterWindow.Owner = Application.Current.MainWindow;
+
+                        // Откройте окно в модальном режиме (ShowDialog)
+                        bool? result = createCharacterWindow.ShowDialog();
+
+                        // Если результат окна положительный (например, пользователь нажал "Создать"),
+                        // вы можете обновить коллекцию персонажей, если это необходимо.
+                        if (result == true)
+                        {
+                            Characters.Add(createCharacterViewModel.Character);
+                            SelectedCharacter = createCharacterViewModel.Character;
+                        }
+                    }));
+            }
+        }
+
+
+        private RelayCommand deleteCharacterCommand;
+        public RelayCommand DeleteCharacterCommand
+        {
+            get
+            {
+                return deleteCharacterCommand ??
+                    (deleteCharacterCommand = new RelayCommand(obj =>
+                    {
+                        Character character = new Character();
+                        Characters.Remove(character);
+                        SelectedCharacter = character;
+                    }));
+            }
+        }
+         
+        private void ChangeProficient(object obj)
+        {
+            if (obj is Skill skill)
+            {
+                skill.Proficient = !skill.Proficient;
+            }
+        }
+        private RelayCommand changeProficientCommand;
+        public RelayCommand ChangeProficientCommand
+        {
+            get
+            {
+                return changeProficientCommand ??
+                (changeProficientCommand = new RelayCommand(obj => ChangeProficient(obj)));
+            }
+        }
+        
+
+        private void SkillCast(object obj)
+        {
+            if (obj is Skill skill)
+            {
+                skill.Cast();
+            }
+        }
+        
+        
+
         public ApplicationViewModel()
         {
             Characters = new ObservableCollection<Character>(DataContext.DataBase.Characters);

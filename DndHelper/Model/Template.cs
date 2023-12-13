@@ -19,6 +19,7 @@ namespace DndHelper.Model
 
         private int level;
         private int hitPoints;
+        private int currenthitPoints;
         private int armorClass;
         private int masteryBonus;
         private int speed;
@@ -69,6 +70,7 @@ namespace DndHelper.Model
             {
                 level = value;
                 OnPropertyChanged(nameof(Level));
+                UpdateMasteryBonus();
             }
         }
         public int HitPoints
@@ -80,6 +82,16 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(HitPoints));
             }
         }
+        public int CurrenthitPoints
+        {
+            get { return currenthitPoints; }
+            set
+            {
+                currenthitPoints = value;
+                OnPropertyChanged(nameof(CurrenthitPoints));
+            }
+        }
+
         public int ArmorClass
         {
             get { return armorClass; }
@@ -161,6 +173,29 @@ namespace DndHelper.Model
             {
                 abilities = value;
                 OnPropertyChanged(nameof(Abilities));
+            }
+        }
+        public void UpdateMasteryBonus()
+        {
+            if (Level <= 4)
+            {
+                MasteryBonus = 2;
+            }
+            else if (Level  <= 8)
+            {
+                MasteryBonus = 3;
+            }
+            else if (Level <= 12)
+            {
+                MasteryBonus = 4;
+            }
+            else if (Level <= 16)
+            {
+                MasteryBonus = 5;
+            }
+            else if (Level <= 20)
+            {
+                MasteryBonus = 6;
             }
         }
     }

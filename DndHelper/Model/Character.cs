@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -46,6 +47,7 @@ namespace DndHelper.Model
             {
                 classCharacter = value;
                 OnPropertyChanged(nameof(ClassCharacter));
+                UpdateMasteryBonus();
             }
         }
         public string Archetype
@@ -67,24 +69,29 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Owerships));
             }
         }
-
-        public Character(
-            string name,
-            string race,
-            string classCharacter,
-            int level = 1,
-            string archetype = default)
+        public int GetStatValue(string statName)
         {
-            Name = name;
-            Race = race;
-            ClassCharacter = classCharacter;
+            Stat targetStat = States.FirstOrDefault(stat => stat.Name == statName);
 
-            Level  = level;
+            if (targetStat != null)
+            {
+                return targetStat.Modifier;
+            }
+            else
+            {
+                // Если характеристика не найдена, можно вернуть значение по умолчанию или выбрать другую логику
+                return 0;
+            }
+        }
+
+        public Character()
+        {
+            CurrenthitPoints = 0;
             HitPoints = 0;
             ArmorClass = 10;
             Exhaustion = 0;
-            UpdateMasteryBonus(level);
-            Speed = 0;
+            UpdateMasteryBonus();
+            Speed = 30;
             PassivePerception = 10;
             Initiative = 0;
 
@@ -93,37 +100,19 @@ namespace DndHelper.Model
             MasteryInspiration = false;
             BardicInspiration = false;
 
-            Archetype = archetype;
-
-            States = DataContext.DataBase.DefultStats;
+            States = new ObservableCollection<Stat>
+            {
+                new Stat("Strength", this, 15),
+                new Stat("Dexterity", this, 14),
+                new Stat("Constitution", this, 13),
+                new Stat("Intelligence", this, 12),
+                new Stat("Wisdom", this, 10),
+                new Stat("Charisma", this, 8)     
+            };
 
             Equipment = new();
             Owerships = new();
             Abilities = new();
-        }
-
-        public void UpdateMasteryBonus(int level)
-        {
-            if (level <= 4)
-            {
-                MasteryBonus = 2;
-            }
-            else if (level  <= 8)
-            {
-                MasteryBonus = 3;
-            }
-            else if (level <= 12)
-            {
-                MasteryBonus = 4;
-            }
-            else if (level <= 16)
-            {
-                MasteryBonus = 5;
-            }
-            else if (level <= 20)
-            {
-                MasteryBonus = 6;
-            }
         }
     }
 }

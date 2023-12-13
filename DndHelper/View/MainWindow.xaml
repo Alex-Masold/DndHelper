@@ -38,7 +38,10 @@
                         <TextBox DockPanel.Dock="Top"
                      Text="{Binding SearchCharacterString, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
                         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Margin="0,5,0,0">
-                            <Button x:Name="AddUser" DockPanel.Dock="Left" Command="{Binding AddUserCommand}">Добавить</Button>
+                            <Button x:Name="AddUser" 
+                                    DockPanel.Dock="Left" 
+                                    Command="{Binding AddCharacterCommand}"
+                                    Content="Добавить"></Button>
                             <Button x:Name="DeleteUser" DockPanel.Dock="Right" Command="{Binding DeleteUserCommand}">Удалить</Button>
                         </StackPanel>
 
@@ -53,6 +56,8 @@
                                     <GridViewColumn Header="Race" DisplayMemberBinding="{Binding Path=Race}"/>
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                                     <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=Level}"/>
+                                    <GridViewColumn Header="HP" DisplayMemberBinding="{Binding Path=HitPoints}"/>
+                                    <GridViewColumn Header="" DisplayMemberBinding="{Binding Path=CurrentHitPoints}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -61,15 +66,34 @@
                     <TabControl>
                         <TabItem Header="Name">
                             <StackPanel DataContext="{Binding SelectedCharacter}" Margin="0,5,0,5">
-                                <TextBlock Text="Выбранный Персонаж" Margin="5,0,0,0" />
-                                <TextBlock Text="Имя" Margin="5,0,0,0" />
-                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"             Margin="5,5,0,5" />
-                                <TextBlock Text="Раса" Margin="5,0,0,0" />
-                                <TextBox Text="{Binding Race, UpdateSourceTrigger=PropertyChanged}"             Margin="5,5,0,0" />
-                                <TextBlock Text="Класс" Margin="5,0,0,0" />
-                                <TextBox Text="{Binding ClassCharacter,                                         UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0" />
-                                <TextBlock Text="Уровень" Margin="5,0,0,0" />
-                                    <TextBox Text="{Binding Level,                           UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0" />    
+                                <WrapPanel>
+                                    <WrapPanel Orientation="Vertical">
+                                        <TextBlock 
+                                            Text="Уровень" 
+                                            Margin="5,0,0,0" />
+                                        <TextBox 
+                                            Text="{Binding Level, UpdateSourceTrigger=PropertyChanged}" 
+                                            Margin="5,0,0,0" 
+                                            HorizontalAlignment="Center" />
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Vertical">
+                                        <TextBlock 
+                                            Text="Бонус Мастерства" 
+                                            Margin="5,0,0,0" />
+                                        <TextBlock 
+                                            Text="{Binding MasteryBonus, UpdateSourceTrigger=PropertyChanged}" 
+                                            Margin="5,0,0,0" 
+                                            HorizontalAlignment="Center" />
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Vertical">
+                                        <TextBlock Text="Скорость"
+                                                   Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding Speed, UpdateSourceTrigger=PropertyChanged}"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="5,0,0,0"/>
+                                    </WrapPanel>
+
+                                </WrapPanel>
                             </StackPanel>
                         </TabItem>
                         <TabItem Header="States">
@@ -77,18 +101,51 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding Value}"/>
-                                            <TextBlock Text="{Binding Modifier}"/>
+                                            <WrapPanel>
+                                                <TextBlock Text="{Binding Name}"
+                                                           Margin="0,0,5,0"
+                                                           FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding Value}" 
+                                                           Margin="0,0,5,0"/>
+                                            </WrapPanel>
+                                            
+                                            <WrapPanel>
+                                                <WrapPanel>
+                                                    <TextBlock Text="Проверка:" Margin="0,0,5,0"/>
+                                                    <Button Content ="{Binding Modifier}" 
+                                                            Command="{Binding StatCastCommand}"
+                                                            Padding="5,0,5,0"
+                                                            Margin="0,0,5,0"/>
+                                                </WrapPanel>
+                                                
+                                                <WrapPanel>
+                                                    <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
+                                                    <WrapPanel>
+                                                        <Button Content="{Binding SavingThrows.Modifier}"
+                                                                Command="{Binding SavingThrows.SkillCastCommand}"
+                                                                Padding="5,0,5,0" 
+                                                                Margin="0,0,5,0"/>
+                                                        <CheckBox IsChecked="{Binding SavingThrows.Proficient, Mode=TwoWay}" 
+                                                                  Margin="0,0,5,0"
+                                                                  FontStyle="Italic"/>
+                                                    </WrapPanel>
+                                                </WrapPanel>
+                                            </WrapPanel>
 
                                             <!-- ListBox для отображения Skills -->
                                             <ListBox ItemsSource="{Binding Skills}" Margin="0,5,0,5">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <WrapPanel>
-                                                            <TextBlock Text="{Binding Modifier}"/>
-                                                            <TextBlock Text="{Binding Proficient}"/>
-                                                            <TextBlock Text="{Binding Name}" FontStyle="Italic"/>
+                                                            <Button Content="{Binding Modifier}"
+                                                                    Command="{Binding SkillCastCommand}"
+                                                                    Padding="5,0,5,0"
+                                                                    Margin="0,0,5,0"/>
+                                                            <CheckBox
+                                                                IsChecked="{Binding Proficient, Mode=TwoWay}" 
+                                                                Content="{Binding Name}" 
+                                                                Margin="0,0,5,0"
+                                                                FontStyle="Italic"/>
                                                         </WrapPanel>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>
@@ -99,8 +156,6 @@
                             </ListBox>
                         </TabItem>
                     </TabControl>
-                    
-
                 </DockPanel>
             </TabItem>
         </TabControl>

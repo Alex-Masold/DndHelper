@@ -12,64 +12,118 @@ namespace DndHelper.DataContext
 {
     public class DataBase
     {
-        public static Dictionary<string, ObservableCollection<Skill>> Skills = new()
+        public static ObservableCollection<string> Classes = new()
         {
-            { "Strength", 
-                new ObservableCollection<Skill> { 
-                new Skill("Athletics",          null, null) 
-            } },
-            { "Dexterity", 
-                new ObservableCollection<Skill> { 
-                new Skill("Acrobatics",         null, null), 
-                new Skill("Sleight of Hand",    null, null), 
-                new Skill("Stealth",            null, null) 
-            } },
-            { "Constitution", new ObservableCollection<Skill>() },
-            { "Intelligence", 
-                new ObservableCollection<Skill> { 
-                new Skill("Arcana",             null, null), 
-                new Skill("History",            null, null), 
-                new Skill("Investigation",      null, null), 
-                new Skill("Nature",             null, null), 
-                new Skill("Religion",           null, null) 
-            } },
-            { "Wisdom", 
-                new ObservableCollection<Skill> { 
-                new Skill("Animal Handling",    null, null), 
-                new Skill("Insight",            null, null), 
-                new Skill("Medicine",           null, null), 
-                new Skill("Perception",         null, null), 
-                new Skill("Survival",           null, null)
-            } },
-            { "Charisma", 
-                new ObservableCollection<Skill> { 
-                new Skill("Deception",          null, null), 
-                new Skill("Intimidation",       null, null),
-                new Skill("Performance",        null, null), 
-                new Skill("Persuasion",         null, null) 
-            } }
+            "Bard",
+            "Barbarian",
+            "Fighter",
+            "Wizard",
+            "Druid",
+            "Cleric",
+            "Artificer",
+            "Warlock",
+            "Monk",
+            "Paladin",
+            "Rogue",
+            "Ranger",
+            "Sorcerer"
         };
-        public static ObservableCollection<Stat> DefultStats = new()
+        public static ObservableCollection<string> Races = new()
         {
-            new Stat("Strength"),
-            new Stat("Dexterity"),
-            new Stat("Constitution"),
-            new Stat("Intelligence"),
-            new Stat("Wisdom"),
-            new Stat("Charisma")
+            "Aarakocra",
+            "Aasimar",
+            "Autognome",
+            "Astral elf",
+            "Bugbear",
+            "Verdan",
+            "Simic hybrid",
+            "Gith",
+            "Giff",
+            "Gnome",
+            "Goblin",
+            "Goliath",
+            "Grung",
+            "Dwarf",
+            "Air Genasi",
+            "Earth Genasi",
+            "Fire Genasi",
+            "Water Genasi",
+            "Dragonborn",
+            "Harengon",
+            "Kalashtar",
+            "Kender",
+            "Kenku",
+            "Centaur",
+            "Kobold",
+            "Warforged",
+            "Leonin",
+            "Locathah",
+            "Loxodon",
+            "Lizardfolk",
+            "Minotaur",
+            "Orc",
+            "Plasmoid",
+            "Half-orc",
+            "Halfling",
+            "Half-elf",
+            "Satyr",
+            "Owlin",
+            "Tabaxi",
+            "Tiefling (Asmodeus)",
+            "Tiefling (Baalzebul)",
+            "Tiefling (Dispater)",
+            "Tiefling (Fierna)",
+            "Tiefling (Glasya)",
+            "Tiefling (Levistus)",
+            "Tiefling (Mammon)",
+            "Tiefling (Mephistopheles)",
+            "Tiefling (Zariel)",
+            "Tiefling (Mammon)",
+            "Tiefling (Faerun)",
+            "Tortle",
+            "Thri-kreen",
+            "Triton",
+            "Firbolg",
+            "Fairy",
+            "Hadozee",
+            "Hobgoblin",
+            "Changeling",
+            "Human",
+            "Shifter (Beasthide)",
+            "Shifter (Longtooth)",
+            "Shifter (Wildhunt)",
+            "Shifter (Swiftstride)",
+            "High Elf",
+            "Wood Elf",
+            "Drow",
+            "Sea Elf",
+            "Shadar-kai",
+            "Eladrin",
+            "Yuan-ti"
         };
+
         public static ObservableCollection<Character> Characters = new()
         {
-            new Character(
-                "Character1", 
-                "Human", 
-                "Fighter"),
-            new Character(
-                "Character2", 
-                "Elf", 
-                "Wizard", 
-                3, 
-                "Archmage"),
+            new Character()
+            {
+                Name = "Джошув",
+                Race = "Human",
+                Level = 1,
+                ClassCharacter = "Warrior"
+            },
+            new Character()
+            {
+                Name = "Мех",
+                Race = "Auto-Gnome",
+                ClassCharacter = "Artificer"
+            },
+             new Character()
+            {
+                Name = "Мого",
+                Race = "Plasmoid",
+                Level = 1,
+                ClassCharacter = "Bard"
+            },
         };
     }
 }

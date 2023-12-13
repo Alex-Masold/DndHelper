@@ -10,17 +10,43 @@ namespace DndHelper.Model
     {
         private int count;
         private int type;
-        private int modifier;
 
-        public int Count { get; set; }
-        public int Type { get; set; }
-        public int Modifier { get; set; }
-
-        public Dice(int count, int type, int modifier)
-        {
-            Count = count;
-            Type = type;
-            Modifier = modifier;
+        public int Count 
+        { 
+            get { return count; }
+            set
+            {
+                count = value;
+                OnPropertyChanged(nameof(Count));
+            } 
         }
+        public int Type 
+        { 
+            get { return type; }
+            set
+            {
+                type = value;
+                OnPropertyChanged(nameof(Type));
+            }
+        }
+        
+
+        public int Cast()
+        {
+            Random random = new Random();
+            int result = 0;
+
+            for (int i = 0; i < Count; i++)
+            {
+                // Генерируем случайное число от 1 до Type и добавляем Modifier
+                int roll = random.Next(1, Type + 1);
+
+                // Добавляем результат к общему суммарному значению
+                result += roll;
+            }
+
+            return result;
+        }
+
     }
 }
