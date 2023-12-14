@@ -71,7 +71,7 @@ namespace DndHelper.Model
         }
         public int GetStatValue(string statName)
         {
-            Stat targetStat = States.FirstOrDefault(stat => stat.Name == statName);
+            Stat targetStat = Stats.FirstOrDefault(stat => stat.Name == statName);
 
             if (targetStat != null)
             {
@@ -84,31 +84,10 @@ namespace DndHelper.Model
             }
         }
 
-        public Character()
+        public Character() : base()
         {
-            CurrenthitPoints = 0;
-            HitPoints = 0;
-            ArmorClass = 10;
             Exhaustion = 0;
-            UpdateMasteryBonus();
-            Speed = 30;
-            PassivePerception = 10;
-            Initiative = 0;
-
-            HitPointDice = null;
-
             MasteryInspiration = false;
-            BardicInspiration = false;
-
-            States = new ObservableCollection<Stat>
-            {
-                new Stat("Strength", this, 15),
-                new Stat("Dexterity", this, 14),
-                new Stat("Constitution", this, 13),
-                new Stat("Intelligence", this, 12),
-                new Stat("Wisdom", this, 10),
-                new Stat("Charisma", this, 8)     
-            };
 
             Equipment = new();
             Owerships = new();

@@ -157,13 +157,13 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Equipment));
             }
         }
-        public ObservableCollection<Stat> States
+        public ObservableCollection<Stat> Stats
         {
             get { return states; }
             set
             {
                 states = value;
-                OnPropertyChanged(nameof(States));
+                OnPropertyChanged(nameof(Stats));
             }
         }
         public ObservableCollection<string> Abilities
@@ -174,6 +174,30 @@ namespace DndHelper.Model
                 abilities = value;
                 OnPropertyChanged(nameof(Abilities));
             }
+        }
+        public Template()
+        {
+            CurrenthitPoints = 0;
+            HitPoints = 0;
+            ArmorClass = 10;
+            UpdateMasteryBonus();
+            Speed = 30;
+            PassivePerception = 10;
+            Initiative = 0;
+
+            HitPointDice = null;
+
+            BardicInspiration = false;
+
+            Stats = new ObservableCollection<Stat>
+            {
+                new Stat("Strength", this, 15),
+                new Stat("Dexterity", this, 14),
+                new Stat("Constitution", this, 13),
+                new Stat("Intelligence", this, 12),
+                new Stat("Wisdom", this, 10),
+                new Stat("Charisma", this, 8)
+            };
         }
         public void UpdateMasteryBonus()
         {

@@ -16,7 +16,7 @@ namespace DndHelper.ViewModel
         private string searchString;
 
         private ObservableCollection<string> races;
-        private ObservableCollection<string> classes;
+        private ObservableCollection<Character> classes;
         private ObservableCollection<string> filteredRaces;
         private ObservableCollection<string> filteredClasses;
 
@@ -41,8 +41,18 @@ namespace DndHelper.ViewModel
                 SearchRaces();
             }
         }
+        private Character selectedClass;
+        public Character SelectedClass
+        {
+            get { return selectedClass; }
+            set
+            {
+                selectedClass = value;
+                OnPropertyChanged(nameof(SelectedClass));
+            }
+        }
         public ObservableCollection<string> Races { get; set; }
-        public ObservableCollection<string> Classes { get; set; }
+        public ObservableCollection<Character> Classes { get; set; }
         public ObservableCollection<string> FilteredRaces
         {
             get { return filteredRaces; }
@@ -81,7 +91,12 @@ namespace DndHelper.ViewModel
         {
             Character = new Character();
             Races = new ObservableCollection<string>(DataContext.DataBase.Races);
-            Classes = new ObservableCollection<string>(DataContext.DataBase.Classes);
+            Classes = new ObservableCollection<Character>
+            {
+                new Fighter(),
+                new Cleric()
+                // Добавьте другие классы по мере необходимости
+            };
         }
     }
 }

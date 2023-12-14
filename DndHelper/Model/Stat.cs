@@ -28,7 +28,7 @@ namespace DndHelper.Model
         
         private event EventHandler ValueChanged;
         
-        private Character character;
+        private Template character;
 
         private ObservableCollection<Skill> skills;
 
@@ -202,7 +202,7 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Dice.Count));
             }
         }
-        public Character Character
+        public Template Character
         {
             get { return character; }
             set
@@ -229,7 +229,7 @@ namespace DndHelper.Model
         }
 
 
-        public Stat(string name, Character character, int value =10)
+        public Stat(string name, Template character, int value =10)
         {
             Name = name;
             Character = character;

@@ -14,23 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="{}"/>
-                </StackPanel>
-            </Grid>
-        </DockPanel>-->
+      
         <TabControl Grid.RowSpan="1" Margin="2,0,2,0">
             <TabItem Header="Character">
                 <DockPanel>
@@ -96,8 +80,8 @@
                                 </WrapPanel>
                             </StackPanel>
                         </TabItem>
-                        <TabItem Header="States">
-                            <ListBox ItemsSource="{Binding SelectedCharacter.States}" Margin="0,10,0,10">
+                        <TabItem Header="Stats">
+                            <ListBox ItemsSource="{Binding SelectedCharacter.Stats}" Margin="0,10,0,10">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
