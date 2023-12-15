@@ -17,7 +17,6 @@ namespace DndHelper.Model
         private bool proficient;
         private int modifier;
         private int value;
-        private int masteryBonus;
         private Stat stat;
         private Dice dice;
 

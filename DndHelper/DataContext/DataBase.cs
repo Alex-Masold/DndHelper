@@ -109,7 +109,8 @@ namespace DndHelper.DataContext
                 Name = "Джошув",
                 Race = "Human",
                 Level = 1,
-                ClassCharacter = "Warrior"
+                ClassCharacter = "Warrior",
+
             },
             new Character()
             {
