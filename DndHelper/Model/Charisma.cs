@@ -13,6 +13,9 @@ namespace DndHelper.Model
         private Skill performance;
         private Skill persuasion;
 
+        private int value;
+        private int modifier;
+
         public Skill Deception
         {
             get { return deception; }
@@ -49,7 +52,32 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Persuasion));
             }
         }
-        
+
+        public new int Value
+        {
+            get => value;
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+
+                    SavingThrows.Value = value;
+
+                    Deception.Value = value;
+                    Intimidation.Value = value;
+                    Performance.Value = value;
+                    Persuasion.Value = value;
+
+                    OnPropertyChanged(nameof(Value));
+                    OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
+                }
+            }
+        }
+        public int Modifier
+        {
+            get { return modifier = (Value-10)/2; }
+        }
         public Charisma()
         {
             Name = "Charisma";

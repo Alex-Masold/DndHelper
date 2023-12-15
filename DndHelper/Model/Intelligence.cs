@@ -14,6 +14,9 @@ namespace DndHelper.Model
         private Skill nature;
         private Skill religion;
 
+        private int value;
+        private int modifier;
+
         public Skill Arcana
         {
             get { return arcana; }
@@ -58,6 +61,33 @@ namespace DndHelper.Model
                 religion = value;
                 OnPropertyChanged(nameof(Religion));
             }
+        }
+
+        public new int Value
+        {
+            get => value;
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+
+                    SavingThrows.Value = value;
+
+                    Arcana.Value = value;
+                    History.Value = value;
+                    Investigation.Value = value;
+                    Nature.Value = value;
+                    Religion.Value = value;
+
+                    OnPropertyChanged(nameof(Value));
+                    OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
+                }
+            }
+        }
+        public int Modifier
+        {
+            get { return modifier = (Value-10)/2; }
         }
 
         public Intelligence()

@@ -8,6 +8,29 @@ namespace DndHelper.Model
 {
     public class Constitution : Stat
     {
+        private int value;
+        private int modifier;
+
+        public new int Value
+        {
+            get => value;
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+
+                    SavingThrows.Value = value;
+
+                    OnPropertyChanged(nameof(Value));
+                    OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
+                }
+            }
+        }
+        public int Modifier
+        {
+            get { return modifier = (Value-10)/2; }
+        }
         public Constitution() 
         {
             Name = "Constitution";

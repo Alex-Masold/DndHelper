@@ -114,6 +114,13 @@ namespace DndHelper.Model
             {
                 masteryBonus = value;
                 OnPropertyChanged(nameof(MasteryBonus));
+
+                OnPropertyChanged(nameof(Strength));
+                OnPropertyChanged(nameof(Dexterity));
+                OnPropertyChanged(nameof(Constitution));
+                OnPropertyChanged(nameof(Intelligence));
+                OnPropertyChanged(nameof(Wisdom));
+                OnPropertyChanged(nameof(Charisma));
             }
         }
         public int Speed
