@@ -14,6 +14,9 @@ namespace DndHelper.Model
         private Skill perception;
         private Skill survival;
 
+        private int value;
+        private int modifier;
+
         public Skill AnimalHandling
         {
             get { return animalHandling; }
@@ -59,6 +62,34 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Survival));
             }
         }
+
+        public new int Value
+        {
+            get => value;
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+
+                    SavingThrows.Value = value;
+
+                    AnimalHandling.Value = value;
+                    Insight.Value = value;
+                    Medicine.Value = value;
+                    Perception.Value = value;
+                    Survival.Value = value;
+
+                    OnPropertyChanged(nameof(Value));
+                    OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
+                }
+            }
+        }
+        public int Modifier
+        {
+            get { return modifier = (Value-10)/2; }
+        }
+
         public Wisdom() 
         {
             Name = "Wisdom";

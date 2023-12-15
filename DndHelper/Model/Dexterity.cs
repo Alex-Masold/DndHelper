@@ -12,6 +12,9 @@ namespace DndHelper.Model
         private Skill acrobatics;
         private Skill sleightOfHand;
         private Skill stealth;
+        private int value;
+        private int modifier;
+
 
         public Skill Acrobatics
         {
@@ -40,6 +43,31 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Stealth));
             }
         }
+
+        public new int Value
+        {
+            get => value;
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+                    Acrobatics.Value = value;
+                    SleightOfHand.Value = value;
+                    Stealth.Value = value;
+
+                    SavingThrows.Value = value;
+
+                    OnPropertyChanged(nameof(Value));
+                    OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
+                }
+            }
+        }
+        public int Modifier
+        {
+            get { return modifier = (Value-10)/2; }
+        }
+
 
         public Dexterity()
         {
