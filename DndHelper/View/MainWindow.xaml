@@ -81,63 +81,67 @@
                             </StackPanel>
                         </TabItem>
                         <TabItem Header="Stats">
-                            <ListBox ItemsSource="{Binding SelectedCharacter.Stats}" Margin="0,10,0,10">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <WrapPanel>
-                                                <TextBlock Text="{Binding Name}"
-                                                           Margin="0,0,5,0"
-                                                           FontWeight="Bold"/>
-                                                <TextBlock Text="{Binding Value}" 
-                                                           Margin="0,0,5,0"/>
-                                            </WrapPanel>
-                                            
-                                            <WrapPanel>
-                                                <WrapPanel>
-                                                    <TextBlock Text="Проверка:" Margin="0,0,5,0"/>
-                                                    <Button Content ="{Binding Modifier}" 
-                                                            Command="{Binding StatCastCommand}"
-                                                            Padding="5,0,5,0"
-                                                            Margin="0,0,5,0"/>
-                                                </WrapPanel>
-                                                
-                                                <WrapPanel>
-                                                    <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                                                    <WrapPanel>
-                                                        <Button Content="{Binding SavingThrows.Modifier}"
-                                                                Command="{Binding SavingThrows.SkillCastCommand}"
-                                                                Padding="5,0,5,0" 
-                                                                Margin="0,0,5,0"/>
-                                                        <CheckBox IsChecked="{Binding SavingThrows.Proficient, Mode=TwoWay}" 
-                                                                  Margin="0,0,5,0"
-                                                                  FontStyle="Italic"/>
-                                                    </WrapPanel>
-                                                </WrapPanel>
-                                            </WrapPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel DataContext="{Binding SelectedCharacter}" Margin="5,5,0,0">
 
-                                            <!-- ListBox для отображения Skills -->
-                                            <ListBox ItemsSource="{Binding Skills}" Margin="0,5,0,5">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <WrapPanel>
-                                                            <Button Content="{Binding Modifier}"
-                                                                    Command="{Binding SkillCastCommand}"
-                                                                    Padding="5,0,5,0"
-                                                                    Margin="0,0,5,0"/>
-                                                            <CheckBox
-                                                                IsChecked="{Binding Proficient, Mode=TwoWay}" 
-                                                                Content="{Binding Name}" 
-                                                                Margin="0,0,5,0"
-                                                                FontStyle="Italic"/>
-                                                        </WrapPanel>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                    <!--Имя характеристики и ее значение-->
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Strength.Name}"
+                                                   Margin="0,0,5,0"
+                                                   FontWeight="Bold"/>
+
+                                        <TextBlock Text="{Binding Strength.Value}" 
+                                                   Margin="0,0,5,0"/>
+                                    </WrapPanel>
+
+                                    <!--Проверка и Спасбросок-->
+                                    <WrapPanel>
+                                        <WrapPanel>
+                                            <TextBlock Text="Проверка:" 
+                                                       Margin="0,0,5,0"/>
+
+                                            <Button Content ="{Binding Strength.Modifier}" 
+                                                    Command="{Binding Strength.StatCastCommand}"
+                                                    Padding="5,0,5,0"
+                                                    Margin="0,0,5,0"/>
+                                        </WrapPanel>
+
+                                        <WrapPanel>
+                                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
+                                            <WrapPanel>
+                                                <Button Content="{Binding Strength.SavingThrows.Modifier}"
+                                                        Command="{Binding Strength.SavingThrows.SkillCastCommand}"
+                                                        Padding="5,0,5,0" 
+                                                        Margin="0,0,5,0"/>
+
+                                                <CheckBox IsChecked="{Binding Strength.SavingThrows.Proficient, Mode=TwoWay}" 
+                                                          FontStyle="Italic"
+                                                          Margin="0,0,5,0"/>
+                                            </WrapPanel>
+                                        </WrapPanel>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="25,0,0,10">
+                                        <Button Content="{Binding Strength.Athletics.Modifier}"
+                                                Command="{Binding SkillCastCommand}"
+                                                Padding="5,0,5,0"
+                                                Margin="0,0,5,0"/>
+
+                                        <CheckBox IsChecked="{Binding Strength.Athletics.Proficient, Mode=TwoWay}" 
+                                                  Content="{Binding Strength.Athletics.Name}" 
+                                                  FontStyle="Italic"
+                                                  Margin="0,0,5,0"/>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </DockPanel>

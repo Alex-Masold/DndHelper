@@ -26,6 +26,13 @@ namespace DndHelper.Model
         private int passivePerception;
         private int initiative;
 
+        private Strength strength;
+        private Dexterity dexterity;
+        private Constitution constitution;
+        private Intelligence intelligence;
+        private Wisdom wisdom;
+        private Charisma charisma;
+
         private Dice hitPointDice;
 
         //private List<> attacks;
@@ -91,7 +98,6 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(CurrenthitPoints));
             }
         }
-
         public int ArmorClass
         {
             get { return armorClass; }
@@ -138,6 +144,61 @@ namespace DndHelper.Model
             }
         }
 
+        public Strength Strength
+        {
+            get { return strength; }
+            set
+            {
+                strength = value;
+                OnPropertyChanged(nameof(Strength));
+            }
+        }
+        public Dexterity Dexterity
+        {
+            get { return dexterity; }
+            set
+            {
+                dexterity = value;
+                OnPropertyChanged(nameof(Dexterity));
+            }
+        }
+        public Constitution Constitution
+        {
+            get { return constitution; }
+            set
+            {
+                constitution = value;
+                OnPropertyChanged(nameof(Constitution));
+            }
+        }
+        public Intelligence Intelligence
+        {
+            get { return intelligence; }
+            set
+            {
+                intelligence = value;
+                OnPropertyChanged(nameof(Intelligence));
+            }
+        }
+        public Wisdom Wisdom
+        {
+            get { return wisdom; }
+            set
+            {
+                wisdom = value;
+                OnPropertyChanged(nameof(Wisdom));
+            }
+        }
+        public Charisma Charisma
+        {
+            get { return charisma; }
+            set
+            {
+                charisma = value;
+                OnPropertyChanged(nameof(Charisma));
+            }
+        }
+
         public Dice HitPointDice
         {
             get { return hitPointDice; }
@@ -155,15 +216,6 @@ namespace DndHelper.Model
             {
                 equipment = value;
                 OnPropertyChanged(nameof(Equipment));
-            }
-        }
-        public ObservableCollection<Stat> Stats
-        {
-            get { return states; }
-            set
-            {
-                states = value;
-                OnPropertyChanged(nameof(Stats));
             }
         }
         public ObservableCollection<string> Abilities
@@ -189,15 +241,13 @@ namespace DndHelper.Model
 
             BardicInspiration = false;
 
-            Stats = new ObservableCollection<Stat>
-            {
-                new Stat("Strength", this, 15),
-                new Stat("Dexterity", this, 14),
-                new Stat("Constitution", this, 13),
-                new Stat("Intelligence", this, 12),
-                new Stat("Wisdom", this, 10),
-                new Stat("Charisma", this, 8)
-            };
+            Strength = new Strength() { Character = this, Value = 15};
+            Dexterity = new Dexterity() { Character = this, Value = 14};
+            Constitution = new Constitution() { Character = this, Value = 13 };
+            Intelligence = new Intelligence() { Character = this, Value = 12 };
+            Wisdom = new Wisdom() { Character = this, Value = 10 };
+            Charisma = new Charisma() { Character = this, Value = 8 };
+
         }
         public void UpdateMasteryBonus()
         {

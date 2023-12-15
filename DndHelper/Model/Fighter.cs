@@ -11,7 +11,7 @@ namespace DndHelper.Model
         public Fighter() : base()
         {
             HitPointDice = new() { Count = 1, Type = 10 };
-            HitPoints = HitPointDice.Type + GetStatValue("Constitution");
+            HitPoints = HitPointDice.Type + Constitution.Modifier;
             ClassCharacter = "Fighter";
 
             Owerships.AddRange(new List<string> { "Shield", "Light armor", "Medium armor", "Heavy armor", "Простое Оружие", "Воинское оружие" });

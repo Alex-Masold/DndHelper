@@ -69,20 +69,6 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Owerships));
             }
         }
-        public int GetStatValue(string statName)
-        {
-            Stat targetStat = Stats.FirstOrDefault(stat => stat.Name == statName);
-
-            if (targetStat != null)
-            {
-                return targetStat.Modifier;
-            }
-            else
-            {
-                // Если характеристика не найдена, можно вернуть значение по умолчанию или выбрать другую логику
-                return 0;
-            }
-        }
 
         public Character() : base()
         {

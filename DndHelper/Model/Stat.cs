@@ -26,49 +26,7 @@ namespace DndHelper.Model
         
         private Dice dice;
         
-        private event EventHandler ValueChanged;
-        
         private Template character;
-
-        private ObservableCollection<Skill> skills;
-
-        private Dictionary<string, ObservableCollection<Skill>> SkillsDictionary = new()
-        {
-            { "Strength",
-                new ObservableCollection<Skill> {
-                new Skill("Athletics",          null)
-            } },
-            { "Dexterity",
-                new ObservableCollection<Skill> {
-                new Skill("Acrobatics",         null),
-                new Skill("Sleight of Hand",    null),
-                new Skill("Stealth",            null)
-            } },
-            { "Constitution", new ObservableCollection<Skill>() },
-            { "Intelligence",
-                new ObservableCollection<Skill> {
-                new Skill("Arcana",             null),
-                new Skill("History",            null),
-                new Skill("Investigation",      null),
-                new Skill("Nature",             null),
-                new Skill("Religion",           null)
-            } },
-            { "Wisdom",
-                new ObservableCollection<Skill> {
-                new Skill("Animal Handling",    null),
-                new Skill("Insight",            null),
-                new Skill("Medicine",           null),
-                new Skill("Perception",         null),
-                new Skill("Survival",           null)
-            } },
-            { "Charisma",
-                new ObservableCollection<Skill> {
-                new Skill("Deception",          null),
-                new Skill("Intimidation",       null),
-                new Skill("Performance",        null),
-                new Skill("Persuasion",         null)
-            } }
-        };
 
         private RelayCommand statCastCommand;
         public RelayCommand StatCastCommand
@@ -88,7 +46,7 @@ namespace DndHelper.Model
                     // Создание объекта Border для стилизации внешнего вида Popup
                     Border popupBorder = new Border();
                     popupBorder.Background = Brushes.White; // Цвет фона
-                    popupBorder.BorderBrush = Brushes.Black; // Цвет границы
+                    popupBorder.BorderBrush = Brushes.Black; // Цвет границы 
                     popupBorder.BorderThickness = new Thickness(1); // Толщина границы
 
                     // Текст сообщения
@@ -166,7 +124,7 @@ namespace DndHelper.Model
                     this.value = value;
                     OnPropertyChanged(nameof(Value));
                     OnPropertyChanged(nameof(Modifier)); // При изменении значения обновляем и модификатор
-                    ValueChanged?.Invoke(this, EventArgs.Empty); // Вызываем событие при изменении Value
+
                 }
             }
         }
@@ -214,49 +172,12 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(MasteryBonus));
             }
         }
-        
-        public ObservableCollection<Skill> Skills
+
+        public Stat()
         {
-            get => skills;
-            set
-            {
-                if (skills != value)
-                {
-                    skills = value;
-                    OnPropertyChanged(nameof(Skills));
-                }
-            }
-        }
-
-
-        public Stat(string name, Template character, int value =10)
-        {
-            Name = name;
-            Character = character;
-
-            Value = value;
-            Skills = new ObservableCollection<Skill>(SkillsDictionary.GetValueOrDefault(name));
-            SavingThrows = new Skill(name, this) { Value = this.Value};
             Dice = new Dice() { Count = 1, Type = 20 };
-
-            StatInit();
-
-            ValueChanged += (sender, args) =>
-            {
-                foreach (Skill skill in Skills)
-                {
-                    skill.Value = Value;
-                }
-            };
         }
-        public void StatInit()
-        {
-            foreach (Skill current in this.Skills)
-            { 
-                current.Stat = this;
-                current.Value = Value;
-            }
-        }
+        
         public string Cast()
         {
             int cast = Dice.Cast();

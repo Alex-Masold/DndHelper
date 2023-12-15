@@ -11,19 +11,10 @@ namespace DndHelper.Model
         public Cleric() 
         {
             HitPointDice = new Dice() { Count = 1, Type = 8 };
-            HitPoints = HitPointDice.Type + GetStatValue("Constitution");
+            HitPoints = HitPointDice.Type + Constitution.Modifier;
             ClassCharacter = "Cleric";
 
             Owerships.AddRange(new List<string> { "Щит", "Легкие доспехи", "Средние доспехи", "Простое Оружие" });
-            var ClericSkills = new List<string> { "History", "Medicine  ", "Performance", "Religion", "Persuasion" };
-
-            foreach (Stat x in Stats)
-            {
-                if (x.Name == "Wisdom" || x.Name == "Charisma")
-                {
-                    x.SavingThrows.Proficient = true;
-                }
-            }
 
         }
     }
