@@ -19,7 +19,8 @@ namespace DndHelper.Model
 
         private int level;
         private int hitPoints;
-        private int currenthitPoints;
+        private int currentHitPoints;
+        private int currentHitPointDice;
         private int armorClass;
         private int masteryBonus;
         private int speed;
@@ -37,7 +38,6 @@ namespace DndHelper.Model
 
         //private List<> attacks;
         private ObservableCollection<string> equipment;
-        private ObservableCollection<Stat> states;
         private ObservableCollection<string> abilities;
 
                     
@@ -80,6 +80,7 @@ namespace DndHelper.Model
                 UpdateMasteryBonus();
             }
         }
+
         public int HitPoints
         {
             get { return hitPoints; }
@@ -89,15 +90,25 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(HitPoints));
             }
         }
-        public int CurrenthitPoints
+        public int CurrentHitPoints
         {
-            get { return currenthitPoints; }
+            get { return currentHitPoints; }
             set
             {
-                currenthitPoints = value;
-                OnPropertyChanged(nameof(CurrenthitPoints));
+                currentHitPoints = value;
+                OnPropertyChanged(nameof(CurrentHitPoints));
             }
         }
+        public int CurrentHitPointDice
+        {
+            get { return currentHitPointDice; }
+            set
+            {
+                currentHitPointDice = value;
+                OnPropertyChanged(nameof(CurrentHitPointDice));
+            }
+        }
+
         public int ArmorClass
         {
             get { return armorClass; }
@@ -134,7 +145,7 @@ namespace DndHelper.Model
         }
         public int PassivePerception
         {
-            get { return passivePerception; }
+            get { return passivePerception + Wisdom.Modifier; }
             set
             {
                 passivePerception = value;
@@ -143,7 +154,7 @@ namespace DndHelper.Model
         }
         public int Initiative
         {
-            get { return initiative; }
+            get { return initiative + Dexterity.Modifier; }
             set
             {
                 initiative = value;
@@ -236,24 +247,27 @@ namespace DndHelper.Model
         }
         public Template()
         {
-            CurrenthitPoints = 0;
-            HitPoints = 0;
-            ArmorClass = 10;
-            UpdateMasteryBonus();
-            Speed = 30;
-            PassivePerception = 10;
-            Initiative = 0;
-
-            HitPointDice = null;
-
-            BardicInspiration = false;
-
             Strength = new Strength() { Character = this, Value = 15};
             Dexterity = new Dexterity() { Character = this, Value = 14};
             Constitution = new Constitution() { Character = this, Value = 13 };
             Intelligence = new Intelligence() { Character = this, Value = 12 };
             Wisdom = new Wisdom() { Character = this, Value = 10 };
-            Charisma = new Charisma() { Character = this, Value = 8 };
+            Charisma = new Charisma() { Character = this, Value = 8};
+
+            HitPointDice = new Dice() { Count = 1, Type = 8 };
+
+            CurrentHitPoints = 0;
+            HitPoints = HitPointDice.Type + Constitution.Modifier;
+            CurrentHitPoints = HitPoints;
+            CurrentHitPointDice = HitPointDice.Count;
+            ArmorClass = 10 + Dexterity.Modifier;
+            UpdateMasteryBonus();
+            Speed = 30;
+            PassivePerception = 10;
+            Initiative = 0;
+
+            //HitPointDice = null;
+            BardicInspiration = false;
 
         }
         public void UpdateMasteryBonus()

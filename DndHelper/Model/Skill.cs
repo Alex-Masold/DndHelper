@@ -94,6 +94,20 @@ namespace DndHelper.Model
             }
         }
 
+        private SolidColorBrush skillBackground = Brushes.Aquamarine; // Используйте начальный цвет фона
+        public SolidColorBrush SkillBackground
+        {
+            get { return skillBackground; }
+            set
+            {
+                if (skillBackground != value)
+                {
+                    skillBackground = value;
+                    OnPropertyChanged(nameof(SkillBackground));
+                }
+            }
+        }
+
         public string Name
         {
             get => name;
@@ -181,7 +195,7 @@ namespace DndHelper.Model
         public string Cast()
         {
             int cast = Dice.Cast();
-            string result = $"Результат броска {cast + Modifier}: {cast} + {Modifier}";
+            string result = $"{Name}: Результат броска {cast + Modifier}: {cast} + {Modifier}";
             return result;
         }
     }

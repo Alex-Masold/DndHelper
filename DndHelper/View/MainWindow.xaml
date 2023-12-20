@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-      
+
         <TabControl Grid.RowSpan="1" Margin="2,0,2,0">
             <TabItem Header="Character">
                 <DockPanel>
@@ -40,8 +40,8 @@
                                     <GridViewColumn Header="Race" DisplayMemberBinding="{Binding Path=Race}"/>
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                                     <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=Level}"/>
-                                    <GridViewColumn Header="HP" DisplayMemberBinding="{Binding Path=HitPoints}"/>
-                                    <GridViewColumn Header="" DisplayMemberBinding="{Binding Path=CurrentHitPoints}"/>
+                                    <GridViewColumn Header="HP" DisplayMemberBinding="{Binding Path=CurrentHitPoints}"/>
+                                    <GridViewColumn Header="" DisplayMemberBinding="{Binding Path=HitPoints}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -49,36 +49,170 @@
                     </DockPanel>
                     <TabControl>
                         <TabItem Header="Name">
-                            <StackPanel DataContext="{Binding SelectedCharacter}" Margin="0,5,0,5">
-                                <WrapPanel>
-                                    <WrapPanel Orientation="Vertical">
-                                        <TextBlock 
-                                            Text="Уровень" 
-                                            Margin="5,0,0,0" />
-                                        <TextBox 
-                                            Text="{Binding Level, UpdateSourceTrigger=PropertyChanged}" 
-                                            Margin="5,0,0,0" 
-                                            HorizontalAlignment="Center" />
-                                    </WrapPanel>
-                                    <WrapPanel Orientation="Vertical">
-                                        <TextBlock 
-                                            Text="Бонус Мастерства" 
-                                            Margin="5,0,0,0" />
-                                        <TextBlock 
-                                            Text="{Binding MasteryBonus, UpdateSourceTrigger=PropertyChanged}" 
-                                            Margin="5,0,0,0" 
-                                            HorizontalAlignment="Center" />
-                                    </WrapPanel>
-                                    <WrapPanel Orientation="Vertical">
-                                        <TextBlock Text="Скорость"
-                                                   Margin="5,0,0,0"/>
-                                        <TextBlock Text="{Binding Speed, UpdateSourceTrigger=PropertyChanged}"
+                            <DockPanel>
+                                <StackPanel DataContext="{Binding SelectedCharacter}"
+                                        Margin="5,5,5,5">
+                                    <DockPanel>
+                                        <DockPanel DockPanel.Dock="Left"
+                                                Margin="10,10,10,10"
+                                                VerticalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   Text="ARMOR"
                                                    HorizontalAlignment="Center"
-                                                   Margin="5,0,0,0"/>
-                                    </WrapPanel>
+                                                   FontSize="15"/>
 
-                                </WrapPanel>
-                            </StackPanel>
+                                            <TextBlock DockPanel.Dock="Bottom"
+                                                   Text="{Binding ArmorClass}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="15"/>
+                                            <TextBlock Text="ClASS"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="15"/>
+                                        </DockPanel>
+
+                                        <DockPanel DockPanel.Dock="Right"
+                                               Margin="10,10,10,10"
+                                               HorizontalAlignment="Center">
+
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   Text="SPEED"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="15"/>
+
+                                            <TextBlock Text="{Binding Speed}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="15"/>
+
+                                        </DockPanel>
+
+                                        <DockPanel Margin="10,10,10,10">
+
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   Text="INITITIVE"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="15"/>
+
+                                            <Button Content="{Binding Initiative}"
+                                                    HorizontalAlignment="Center"
+                                                    Padding="25,10,25,10"
+                                                    FontSize="15"/>
+                                        </DockPanel>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock DockPanel.Dock="Top"
+                                               Text="Hit Points"
+                                               HorizontalAlignment="Center"/>
+                                        <DockPanel DockPanel.Dock="Left"
+                                               Margin="10,10,10,10"
+                                               HorizontalAlignment="Center">
+
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   Text="{Binding CurrenthitPoints}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="15"/>
+
+                                            <TextBlock Text="Temp"
+                                                   FontSize="15"/>
+                                        </DockPanel>
+                                        <DockPanel DockPanel.Dock="Right"
+                                               Margin="10,10,10,10"
+                                               HorizontalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                 Text="{Binding HitPoints}"
+                                                 HorizontalAlignment="Center"
+                                                 FontSize="15"/>
+                                            <TextBlock Text="Max"
+                                                   FontSize="15"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="10,10,10,10"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="25"
+                                                   Text="/"/>
+                                        </DockPanel>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <DockPanel DockPanel.Dock="Left">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   HorizontalAlignment="Center"
+                                                   Text="Hit Dice"
+                                                   FontSize="15"/>
+                                            <DockPanel DockPanel.Dock="Left"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
+
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       Text="{Binding CurrentHitPointDice}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15"/>
+
+                                                <TextBlock Text="Temp"
+                                                       FontSize="15"/>
+                                            </DockPanel>
+                                            <DockPanel DockPanel.Dock="Right"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       Text="{Binding HitPointDice.Count    }"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15"/>
+                                                <TextBlock Text="Max"
+                                                       FontSize="15"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="25"
+                                                       Text="/"/>
+                                            </DockPanel>
+                                        </DockPanel>
+                                        <DockPanel DockPanel.Dock="Right">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                   HorizontalAlignment="Center"
+                                                   Text="Death Saves"
+                                                   FontSize="15"/>
+                                            <DockPanel DockPanel.Dock="Left"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
+
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       Text="{Binding DeathSaveTrue}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15"/>
+
+                                                <TextBlock Text="True"
+                                                       FontSize="15"/>
+                                            </DockPanel>
+                                            <DockPanel DockPanel.Dock="Right"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       Text="{Binding DeathSaveFalse}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15"/>
+
+                                                <TextBlock Text="False"
+                                                       FontSize="15"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="25"
+                                                       Text="/"/>
+                                            </DockPanel>
+                                        </DockPanel>
+                                        <DockPanel></DockPanel>
+                                    </DockPanel>
+                                </StackPanel>
+                                <DockPanel></DockPanel>
+                            </DockPanel>
                         </TabItem>
                         <TabItem Header="Stats">
                             <Grid DataContext="{Binding SelectedCharacter}">
@@ -132,7 +266,7 @@
                                             </WrapPanel>
                                         </WrapPanel>
                                     </WrapPanel>
-                                    
+
                                     <!--Навыки-->
                                     <WrapPanel Margin="10,5,0,0">
                                         <Button Content="{Binding Strength.Athletics.Modifier}"
@@ -189,7 +323,7 @@
                                     </WrapPanel>
 
                                     <!--Навыки-->
-                                    
+
                                     <!--Акробатика-->
                                     <WrapPanel Margin="10,5,0,0">
                                         <Button Content="{Binding Dexterity.Acrobatics.Modifier}"
