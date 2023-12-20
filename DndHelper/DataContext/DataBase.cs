@@ -12,6 +12,7 @@ namespace DndHelper.DataContext
 {
     public class DataBase
     {
+        public static List<int> DefultValue = new() { 15, 14, 13, 12, 10, 8 };
         public static ObservableCollection<string> Classes = new()
         {
             "Bard",
@@ -116,6 +117,7 @@ namespace DndHelper.DataContext
             {
                 Name = "Мех",
                 Race = "Auto-Gnome",
+                Level = 1,
                 ClassCharacter = "Artificer"
             },
              new Character()

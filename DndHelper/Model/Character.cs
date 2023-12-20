@@ -12,9 +12,11 @@ namespace DndHelper.Model
 {
     public class Character : Template
     {
-        private int exhaustion;
+        private int exhaustion = 0;
+        private int deathSaveTrue = 0;
+        private int deathSaveFalse = 0;
 
-        private bool masteryinspiration;
+        private bool masteryinspiration = false;
 
         private string classCharacter;
         private string archetype;
@@ -30,6 +32,26 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Exhaustion));
             }
         }
+        public int DeathSaveTrue
+        { 
+            get { return  deathSaveTrue; }
+            set
+            {
+                deathSaveTrue = value;
+                OnPropertyChanged(nameof(DeathSaveTrue));
+            }
+        }
+        public int DeathSaveFalse
+        {
+            get { return deathSaveFalse; }
+            set
+            {
+                deathSaveFalse = value;
+                OnPropertyChanged(nameof(DeathSaveFalse));
+            }
+        }
+
+
         public bool MasteryInspiration
         {
             get { return masteryinspiration; }

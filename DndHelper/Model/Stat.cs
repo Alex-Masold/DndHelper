@@ -181,7 +181,7 @@ namespace DndHelper.Model
         public string Cast()
         {
             int cast = Dice.Cast();
-            string result = $"Результат броска {cast + Modifier}: {cast} + {Modifier}";
+            string result = $"{this.Name}: Результат броска {cast + Modifier}: {cast} + {Modifier}";
             return result;
         }
     }
