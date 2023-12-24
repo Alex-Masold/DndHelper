@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DndHelper.Model
+namespace DndHelper.Model.Stats
 {
     public class Constitution : Stat
     {
@@ -29,13 +29,13 @@ namespace DndHelper.Model
         }
         public int Modifier
         {
-            get { return modifier = (Value-10)/2; }
+            get { return modifier = (Value - 10) / 2; }
         }
-        public Constitution() 
+        public Constitution()
         {
             Name = "Constitution";
 
-            SavingThrows =  new("Constitution", this);
+            SavingThrows = new("Constitution", this);
         }
     }
 }

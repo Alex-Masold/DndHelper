@@ -60,8 +60,7 @@ namespace DndHelper.ViewModel
                 FilteredCharacters = new ObservableCollection<Character>(
                     from character in Characters
                     where
-                    character.Name.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase) ||
-                    character.Race.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase)
+                    character.Name.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase)
                     orderby character.Name
                     select character
                     );
@@ -85,10 +84,7 @@ namespace DndHelper.ViewModel
                         CreateCharacterViewModel createCharacterViewModel = new CreateCharacterViewModel();
 
                         // Создайте окно и установите DataContext
-                        CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow
-                        {
-                            DataContext = createCharacterViewModel
-                        };
+                        CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow();
 
                         // Установите текущее окно в качестве владельца
                         createCharacterWindow.Owner = Application.Current.MainWindow;
@@ -122,33 +118,6 @@ namespace DndHelper.ViewModel
                     }));
             }
         }
-         
-        private void ChangeProficient(object obj)
-        {
-            if (obj is Skill skill)
-            {
-                skill.Proficient = !skill.Proficient;
-            }
-        }
-        private RelayCommand changeProficientCommand;
-        public RelayCommand ChangeProficientCommand
-        {
-            get
-            {
-                return changeProficientCommand ??
-                (changeProficientCommand = new RelayCommand(obj => ChangeProficient(obj)));
-            }
-        }
-        
-
-        private void SkillCast(object obj)
-        {
-            if (obj is Skill skill)
-            {
-                skill.Cast();
-            }
-        }
-        
         
 
         public ApplicationViewModel()

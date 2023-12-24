@@ -17,14 +17,51 @@
 
         <TabControl Grid.RowSpan="1" Margin="2,0,2,0" Padding="10,10,10,10">
             <TabItem Header="Character">
-                <DockPanel DataContext="{Binding Character}">
-                    <Border BorderBrush="Black" BorderThickness="1">
+                <DockPanel>
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                Margin="5,5,5,5">
+                            <DockPanel>
+                                <StackPanel>
+                                    <!-- Existing code for character name -->
+                                    <!-- ... -->
+
+                                    <!-- Combo box for selecting race -->
+                                    <TextBlock Text="Выберите Расу"
+                                               Margin="5,5,5,5"
+                                               Padding="5,5,5,5" />
+                                    <ComboBox ItemsSource="{Binding Races}"
+                                              SelectedItem="{Binding SelectedRace}"
+                                              DisplayMemberPath="Name"
+                                              Margin="5,0,5,0"
+                                              Padding="1,1,1,1" />
+
+                                    <!-- Combo box for selecting class -->
+                                    <TextBlock Text="Выберите Класс"
+                                               Margin="5,5,5,5"
+                                               Padding="5,5,5,5" />
+                                    <ComboBox ItemsSource="{Binding Classes}"
+                                              SelectedItem="{Binding SelectedClass}"
+                                              DisplayMemberPath="ClassCharacter"
+                                              Margin="5,0,5,0"
+                                              Padding="1,1,1,1" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </DockPanel>
+
+                    <DockPanel DataContext="{Binding Character}">
+                        <Border BorderBrush="Black"
+                            BorderThickness="1"
+                            Margin="5,5,5,5"
+                            Padding="5,5,5,5">
                         <DockPanel>
-                            <StackPanel
-                            Margin="5,5,5,5">
+                            <StackPanel DockPanel.Dock="Top">
                                 <DockPanel>
                                     <DockPanel DockPanel.Dock="Left"
-                            Margin="10,10,10,10"
+                            Margin="5,5,5,5"
                             VerticalAlignment="Center">
                                         <TextBlock DockPanel.Dock="Top"
                              Text="ARMOR"
@@ -77,7 +114,7 @@
                            HorizontalAlignment="Center">
 
                                         <TextBlock DockPanel.Dock="Top"
-                             Text="{Binding CurrenthitPoints}"
+                             Text="{Binding CurrentHitPoints}"
                              HorizontalAlignment="Center"
                              FontSize="15"/>
 
@@ -180,9 +217,25 @@
                                     <DockPanel></DockPanel>
                                 </DockPanel>
                             </StackPanel>
+                            <DockPanel DockPanel.Dock="Bottom" Margin="5,5,5,5">
+                                <ListBox  Name ="Traits"
+                                          ItemsSource ="{Binding Traits}" 
+                                          ScrollViewer.CanContentScroll="True" 
+                                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"
+                                                           ToolTip="{Binding Description}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                            </DockPanel>
                         </DockPanel>
                     </Border>
-                <Border BorderBrush="Black" BorderThickness="1">
+                    <Border BorderBrush="Black"
+                            BorderThickness="1"
+                            Margin="5,5,5,5"
+                            Padding="5,5,5,5">
                   <DockPanel>
                     <Grid>
                       <Grid.ColumnDefinitions>
@@ -215,8 +268,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Strength.Modifier}"
-                                    Command="{Binding Strength.StatCastCommand}"
+                            <TextBlock Text ="{Binding Strength.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -224,8 +276,7 @@
                           <WrapPanel>
                             <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Strength.SavingThrows.Modifier}"
-                                      Command="{Binding Strength.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Strength.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -239,8 +290,7 @@
                         <!--Навыки-->
                         <WrapPanel Margin="10,5,0,0"
                                    Background="{Binding Strength.Athletics.SkillBackground}">
-                          <Button Content="{Binding Strength.Athletics.Modifier}"
-                                  Command="{Binding Strength.Athletics.SkillCastCommand}"
+                          <TextBlock Text="{Binding Strength.Athletics.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -271,8 +321,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Dexterity.Modifier}"
-                                    Command="{Binding Dexterity.StatCastCommand}"
+                            <TextBlock Text ="{Binding Dexterity.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -280,8 +329,7 @@
                           <WrapPanel>
                             <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Dexterity.SavingThrows.Modifier}"
-                                      Command="{Binding Dexterity.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Dexterity.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -298,8 +346,7 @@
                         <WrapPanel Margin="10,5,0,0"
                                    Background="{Binding Dexterity.Acrobatics.SkillBackground}">
 
-                          <Button Content="{Binding Dexterity.Acrobatics.Modifier}"
-                                  Command="{Binding Dexterity.Acrobatics.SkillCastCommand}"
+                          <TextBlock Text="{Binding Dexterity.Acrobatics.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -312,8 +359,7 @@
                         <WrapPanel Margin="10,5,0,0"
                                    Background="{Binding Dexterity.SleightOfHand.SkillBackground}">
 
-                        <Button Content="{Binding Dexterity.SleightOfHand.Modifier}"
-                                  Command="{Binding Dexterity.SleightOfHand.SkillCastCommand}"
+                        <TextBlock Text="{Binding Dexterity.SleightOfHand.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -326,8 +372,7 @@
                         <WrapPanel Margin="10,5,0,0"
                                    Background="{Binding Dexterity.Stealth.SkillBackground}">
                             
-                          <Button Content="{Binding Dexterity.Stealth.Modifier}"
-                                  Command="{Binding Dexterity.Stealth.SkillCastCommand}"
+                          <TextBlock Text="{Binding Dexterity.Stealth.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -358,8 +403,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Constitution.Modifier}"
-                                    Command="{Binding Constitution.StatCastCommand}"
+                            <TextBlock Text ="{Binding Constitution.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -368,8 +412,7 @@
                             <TextBlock Text="СпасБросок:"
                                        Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Constitution.SavingThrows.Modifier}"
-                                      Command="{Binding Constitution.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Constitution.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -401,8 +444,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Intelligence.Modifier}"
-                                    Command="{Binding Intelligence.StatCastCommand}"
+                            <TextBlock Text ="{Binding Intelligence.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -410,8 +452,7 @@
                           <WrapPanel>
                             <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Intelligence.SavingThrows.Modifier}"
-                                      Command="{Binding Intelligence.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Intelligence.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -426,8 +467,7 @@
 
                         <!--Магия-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Intelligence.Arcana.Modifier}"
-                                  Command="{Binding Intelligence.Arcana.SkillCastCommand}"
+                          <TextBlock Text="{Binding Intelligence.Arcana.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -438,8 +478,7 @@
                         </WrapPanel>
                         <!--История-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Intelligence.History.Modifier}"
-                                  Command="{Binding Intelligence.History.SkillCastCommand}"
+                          <TextBlock Text="{Binding Intelligence.History.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -450,8 +489,7 @@
                         </WrapPanel>
                         <!--Анализ-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Intelligence.Investigation.Modifier}"
-                                  Command="{Binding Intelligence.Investigation.SkillCastCommand}"
+                          <TextBlock Text="{Binding Intelligence.Investigation.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -462,8 +500,7 @@
                         </WrapPanel>
                         <!--Природа-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Intelligence.Nature.Modifier}"
-                                  Command="{Binding Intelligence.Nature.SkillCastCommand}"
+                          <TextBlock Text="{Binding Intelligence.Nature.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -474,8 +511,7 @@
                         </WrapPanel>
                         <!--Религия-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Intelligence.Religion.Modifier}"
-                                  Command="{Binding Intelligence.Religion.SkillCastCommand}"
+                          <TextBlock Text="{Binding Intelligence.Religion.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -507,8 +543,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Wisdom.Modifier}"
-                                    Command="{Binding Wisdom.StatCastCommand}"
+                            <TextBlock Text ="{Binding Wisdom.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -516,8 +551,7 @@
                           <WrapPanel>
                             <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Wisdom.SavingThrows.Modifier}"
-                                      Command="{Binding Wisdom.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Wisdom.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -532,8 +566,7 @@
 
                         <!--Уход за животными-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Wisdom.AnimalHandling.Modifier}"
-                                  Command="{Binding Wisdom.AnimalHandling.SkillCastCommand}"
+                          <TextBlock Text="{Binding Wisdom.AnimalHandling.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -544,8 +577,7 @@
                         </WrapPanel>
                         <!--Проницательность-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Wisdom.Insight.Modifier}"
-                                  Command="{Binding Wisdom.Insight.SkillCastCommand}"
+                          <TextBlock Text="{Binding Wisdom.Insight.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -556,8 +588,7 @@
                         </WrapPanel>
                         <!--Медицина-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Wisdom.Medicine.Modifier}"
-                                  Command="{Binding Wisdom.Medicine.SkillCastCommand}"
+                          <TextBlock Text="{Binding Wisdom.Medicine.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -568,8 +599,7 @@
                         </WrapPanel>
                         <!--Восприятие-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Wisdom.Perception.Modifier}"
-                                  Command="{Binding Wisdom.Perception.SkillCastCommand}"
+                          <TextBlock Text="{Binding Wisdom.Perception.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -580,8 +610,7 @@
                         </WrapPanel>
                         <!--Выживание-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Wisdom.Survival.Modifier}"
-                                  Command="{Binding Wisdom.Survival.SkillCastCommand}"
+                          <TextBlock Text="{Binding Wisdom.Survival.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -613,8 +642,7 @@
                             <TextBlock Text="Проверка:"
                                        Margin="0,0,5,0"/>
 
-                            <Button Content ="{Binding Charisma.Modifier}"
-                                    Command="{Binding Charisma.StatCastCommand}"
+                            <TextBlock Text ="{Binding Charisma.Modifier}"
                                     Padding="5,0,5,0"
                                     Margin="0,0,5,0"/>
                           </WrapPanel>
@@ -622,8 +650,7 @@
                           <WrapPanel>
                             <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
                             <WrapPanel>
-                              <Button Content="{Binding Charisma.SavingThrows.Modifier}"
-                                      Command="{Binding Charisma.SavingThrows.SkillCastCommand}"
+                              <TextBlock Text="{Binding Charisma.SavingThrows.Modifier}"
                                       Padding="5,0,5,0"
                                       Margin="0,0,5,0"/>
 
@@ -638,8 +665,7 @@
 
                         <!--Обман-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Charisma.Deception.Modifier}"
-                                  Command="{Binding Charisma.Deception.SkillCastCommand}"
+                          <TextBlock Text="{Binding Charisma.Deception.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -650,8 +676,7 @@
                         </WrapPanel>
                         <!--Устрашение-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Charisma.Intimidation.Modifier}"
-                                  Command="{Binding Charisma.Intimidation.SkillCastCommand}"
+                          <TextBlock Text="{Binding Charisma.Intimidation.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -662,8 +687,7 @@
                         </WrapPanel>
                         <!--Представление-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Charisma.Performance.Modifier}"
-                                  Command="{Binding Charisma.Performance.SkillCastCommand}"
+                          <TextBlock Text="{Binding Charisma.Performance.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -674,8 +698,7 @@
                         </WrapPanel>
                         <!--Убеждение-->
                         <WrapPanel Margin="10,5,0,0">
-                          <Button Content="{Binding Charisma.Persuasion.Modifier}"
-                                  Command="{Binding Charisma.Persuasion.SkillCastCommand}"
+                          <TextBlock Text="{Binding Charisma.Persuasion.Modifier}"
                                   Padding="5,0,5,0"
                                   Margin="0,0,5,0"/>
 
@@ -688,7 +711,11 @@
                     </Grid>
                   </DockPanel>
                 </Border>
-              </DockPanel>
+                </DockPanel>
+                </DockPanel>
+                
+                
+                
               
             </TabItem>
             <TabItem Header="Stats">

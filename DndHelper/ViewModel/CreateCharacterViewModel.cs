@@ -1,7 +1,10 @@
 ﻿using DndHelper.Model;
+using DndHelper.Model.Classes;
+using DndHelper.Model.Races;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -13,15 +16,9 @@ namespace DndHelper.ViewModel
     {
         private Character character;
 
-        private string searchString;
-
         private ObservableCollection<string> races;
         private ObservableCollection<Character> classes;
-        private ObservableCollection<string> filteredRaces;
-        private ObservableCollection<string> filteredClasses;
 
-        
-        
         public Character Character
         {
             get { return character; }
@@ -31,16 +28,6 @@ namespace DndHelper.ViewModel
                 OnPropertyChanged(nameof(Character));
             }
         }
-        public string SearchString
-        {
-            get { return searchString; }
-            set
-            {
-                searchString = value;
-                OnPropertyChanged(nameof(SearchString));
-                SearchRaces();
-            }
-        }
         private Character selectedClass;
         public Character SelectedClass
         {
@@ -48,55 +35,53 @@ namespace DndHelper.ViewModel
             set
             {
                 selectedClass = value;
+                Character = value;
                 OnPropertyChanged(nameof(SelectedClass));
             }
         }
-        public ObservableCollection<string> Races { get; set; }
+        private Race selectedRace;
+        public Race SelectedRace
+        {
+            get { return selectedRace; }
+            set
+            {
+                selectedRace = value;
+                OnPropertyChanged(nameof(SelectedRace));
+                UpdateSelectedClassRace();
+            }
+        }
+        public ObservableCollection<Race> Races { get; set; }
         public ObservableCollection<Character> Classes { get; set; }
-        public ObservableCollection<string> FilteredRaces
-        {
-            get { return filteredRaces; }
-            set
-            {
-                filteredRaces = value;
-                OnPropertyChanged(nameof(FilteredRaces));
-            }
-        }
-        public ObservableCollection<string> FilteredClasses
-        {
-            get { return filteredClasses; }
-            set
-            {
-                filteredClasses = value;
-                OnPropertyChanged(nameof(FilteredClasses));
-            }
-        }
-        private void SearchRaces()
-        {
-            if (string.IsNullOrEmpty(SearchString))
-            {
-                FilteredRaces = Races;
-            }
-            else
-            {
-                FilteredRaces = new ObservableCollection<string>(
-                    from race in Races
-                    where race.Contains(SearchString, StringComparison.OrdinalIgnoreCase)
-                    orderby race
-                    select race
-                );
-            }
-        }
+
         public CreateCharacterViewModel()
         {
             Character = new Character();
-            Races = new ObservableCollection<string>(DataContext.DataBase.Races);
+            Races = new()
+            {
+                new HalfOrc() {Character = SelectedClass},
+                new WoodElf() {Character = SelectedClass},
+                new HighElf() {Character = SelectedClass},
+                new Goblin()  {Character = SelectedClass}
+            };
+
+            SelectedRace = Races.First();
+
             Classes = new ObservableCollection<Character>
             {
-                new Fighter(),
-                new Cleric()
+                new Fighter(SelectedRace),
+                new Cleric(SelectedRace)
                 // Добавьте другие классы по мере необходимости
             };
+
+            SelectedClass = Classes.First();
+        }
+        private void UpdateSelectedClassRace()
+        {
+            if(SelectedClass != null)
+    {
+                SelectedClass.Race = SelectedRace;
+                OnPropertyChanged(nameof(Classes));
+            }
         }
     }
 }

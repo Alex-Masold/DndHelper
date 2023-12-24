@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
-namespace DndHelper.Model
+namespace DndHelper.Model.Stats
 {
     public class Dexterity : Stat
     {
@@ -19,8 +19,8 @@ namespace DndHelper.Model
         public Skill Acrobatics
         {
             get { return acrobatics; }
-            set 
-            { 
+            set
+            {
                 acrobatics = value;
                 OnPropertyChanged(nameof(Acrobatics));
             }
@@ -65,7 +65,7 @@ namespace DndHelper.Model
         }
         public int Modifier
         {
-            get { return modifier = (Value-10)/2; }
+            get { return modifier = (Value - 10) / 2; }
         }
 
 

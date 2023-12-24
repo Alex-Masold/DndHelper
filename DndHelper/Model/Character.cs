@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DndHelper.Model.Races;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -15,13 +17,19 @@ namespace DndHelper.Model
         private int exhaustion = 0;
         private int deathSaveTrue = 0;
         private int deathSaveFalse = 0;
+        private int hitPoints;
+        private int currentHitPoints;
+        private int currentHitPointDice;
 
         private bool masteryinspiration = false;
 
         private string classCharacter;
         private string archetype;
 
-        private List<string> ownerships;
+        private ObservableCollection<string> abilities;
+
+        private Race race;
+
 
         public int Exhaustion
         {
@@ -50,7 +58,33 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(DeathSaveFalse));
             }
         }
-
+        public new int HitPoints
+        {
+            get { return hitPoints; }
+            set
+            {
+                hitPoints = value;
+                OnPropertyChanged(nameof(HitPoints));
+            }
+        }
+        public int CurrentHitPoints
+        {
+            get { return currentHitPoints; }
+            set
+            {
+                currentHitPoints = value;
+                OnPropertyChanged(nameof(CurrentHitPoints));
+            }
+        }
+        public int CurrentHitPointDice
+        {
+            get { return currentHitPointDice; }
+            set
+            {
+                currentHitPointDice = value;
+                OnPropertyChanged(nameof(CurrentHitPointDice));
+            }
+        }
 
         public bool MasteryInspiration
         {
@@ -82,13 +116,23 @@ namespace DndHelper.Model
             }
         }
 
-        public List<string> Owerships
+        public ObservableCollection<string> Abilities
         {
-            get { return ownerships; }
+            get { return abilities; }
             set
             {
-                ownerships = value;
-                OnPropertyChanged(nameof(Owerships));
+                abilities = value;
+                OnPropertyChanged(nameof(Abilities));
+            }
+        }
+
+        public new Race Race
+        {
+            get { return race; }
+            set
+            {
+                race = value;
+                OnPropertyChanged(nameof(Race));
             }
         }
 
@@ -98,8 +142,8 @@ namespace DndHelper.Model
             MasteryInspiration = false;
 
             Equipment = new();
-            Owerships = new();
             Abilities = new();
+
         }
     }
 }
