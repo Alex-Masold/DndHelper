@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndHelper.Model.Stats;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,8 +20,7 @@ namespace DndHelper.Model
 
         private int level;
         private int hitPoints;
-        private int currentHitPoints;
-        private int currentHitPointDice;
+        
         private int armorClass;
         private int masteryBonus;
         private int speed;
@@ -38,9 +38,8 @@ namespace DndHelper.Model
 
         //private List<> attacks;
         private ObservableCollection<string> equipment;
-        private ObservableCollection<string> abilities;
+        private ObservableCollection<Trait> traits;
 
-                    
         public string Name
         {
             get { return name; }
@@ -83,31 +82,9 @@ namespace DndHelper.Model
 
         public int HitPoints
         {
-            get { return hitPoints; }
-            set
-            {
-                hitPoints = value;
-                OnPropertyChanged(nameof(HitPoints));
-            }
+            get { return hitPoints = HitPointDice.Cast(); }
         }
-        public int CurrentHitPoints
-        {
-            get { return currentHitPoints; }
-            set
-            {
-                currentHitPoints = value;
-                OnPropertyChanged(nameof(CurrentHitPoints));
-            }
-        }
-        public int CurrentHitPointDice
-        {
-            get { return currentHitPointDice; }
-            set
-            {
-                currentHitPointDice = value;
-                OnPropertyChanged(nameof(CurrentHitPointDice));
-            }
-        }
+      
 
         public int ArmorClass
         {
@@ -236,30 +213,24 @@ namespace DndHelper.Model
                 OnPropertyChanged(nameof(Equipment));
             }
         }
-        public ObservableCollection<string> Abilities
+        public ObservableCollection<Trait> Traits
         {
-            get { return abilities; }
+            get { return traits; }
             set
             {
-                abilities = value;
-                OnPropertyChanged(nameof(Abilities));
+                traits = value;
+                OnPropertyChanged(nameof(Traits));
             }
         }
         public Template()
         {
-            Strength = new Strength() { Character = this, Value = 15};
-            Dexterity = new Dexterity() { Character = this, Value = 14};
-            Constitution = new Constitution() { Character = this, Value = 13 };
-            Intelligence = new Intelligence() { Character = this, Value = 12 };
+            Strength = new Strength() { Character = this, Value = 10};
+            Dexterity = new Dexterity() { Character = this, Value = 10};
+            Constitution = new Constitution() { Character = this, Value = 10 };
+            Intelligence = new Intelligence() { Character = this, Value = 10 };
             Wisdom = new Wisdom() { Character = this, Value = 10 };
-            Charisma = new Charisma() { Character = this, Value = 8};
+            Charisma = new Charisma() { Character = this, Value = 10};
 
-            HitPointDice = new Dice() { Count = 1, Type = 8 };
-
-            CurrentHitPoints = 0;
-            HitPoints = HitPointDice.Type + Constitution.Modifier;
-            CurrentHitPoints = HitPoints;
-            CurrentHitPointDice = HitPointDice.Count;
             ArmorClass = 10 + Dexterity.Modifier;
             UpdateMasteryBonus();
             Speed = 30;

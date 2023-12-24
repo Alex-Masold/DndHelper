@@ -13,19 +13,19 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Threading;
 using System.Xml.Linq;
 
-namespace DndHelper.Model
+namespace DndHelper.Model.Stats
 {
     public class Stat : PropPropertyChanged
     {
         private string name;
-        
+
         private int value;
         private int modifier;
 
         private Skill savingThrows;
-        
+
         private Dice dice;
-        
+
         private Template character;
 
         private RelayCommand statCastCommand;
@@ -33,7 +33,8 @@ namespace DndHelper.Model
         {
             get
             {
-                return statCastCommand ?? (statCastCommand = new RelayCommand(obj => {
+                return statCastCommand ?? (statCastCommand = new RelayCommand(obj =>
+                {
 
                     // Создание объекта Popup
                     Popup messagePopup = new Popup();
@@ -70,8 +71,8 @@ namespace DndHelper.Model
                     messagePopup.CustomPopupPlacementCallback = (popupSize, targetSize, offset) =>
                     {
                         // Расположение в правом нижнем углу
-                        double x = targetSize.Width - popupSize.Width*1.5;
-                        double y = targetSize.Height - popupSize.Height*3;
+                        double x = targetSize.Width - popupSize.Width * 1.5;
+                        double y = targetSize.Height - popupSize.Height * 3;
 
                         return new[] { new CustomPopupPlacement(new Point(x, y), PopupPrimaryAxis.None) };
                     };
@@ -134,7 +135,7 @@ namespace DndHelper.Model
         }
         public int Modifier
         {
-            get { return modifier = (Value-10)/2; }
+            get { return modifier = (Value - 10) / 2; }
         }
 
         public Skill SavingThrows
@@ -177,11 +178,11 @@ namespace DndHelper.Model
         {
             Dice = new Dice() { Count = 1, Type = 20 };
         }
-        
+
         public string Cast()
         {
             int cast = Dice.Cast();
-            string result = $"{this.Name}: Результат броска {cast + Modifier}: {cast} + {Modifier}";
+            string result = $"{Name}: Результат броска {cast + Modifier}: {cast} + {Modifier}";
             return result;
         }
     }

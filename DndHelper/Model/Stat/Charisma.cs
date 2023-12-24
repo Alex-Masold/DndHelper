@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DndHelper.Model
+namespace DndHelper.Model.Stats
 {
     public class Charisma : Stat
     {
@@ -76,7 +76,7 @@ namespace DndHelper.Model
         }
         public int Modifier
         {
-            get { return modifier = (Value-10)/2; }
+            get { return modifier = (Value - 10) / 2; }
         }
         public Charisma()
         {
