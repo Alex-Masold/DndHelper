@@ -110,20 +110,19 @@ namespace DndHelper.DataContext
 
         public static ObservableCollection<Character> Characters = new()
         {
-            new Fighter(new Goblin(), 15, 16, 15, 8, 8, 10)
+            new Fighter(new WoodElf(), 15, 16, 15, 8, 8, 10)
             {
                 Name = "Биба",
-                Level = 1,
-
+                Level = 1
             },
-            new Cleric(new WoodElf(), 10, 12, 15, 15, 18, 10)
+            new Cleric(new Goblin(), 10, 12, 15, 15, 18, 10)
             {
-                Name = "Мех",
+                Name = "мех",
                 Level = 1
             },
              new Cleric(new HalfOrc())
             {
-                Name = "Мого",
+                Name = "мого",
                 Level = 1,
 
             },

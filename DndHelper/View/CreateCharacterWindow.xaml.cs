@@ -25,5 +25,10 @@ namespace DndHelper.View
             InitializeComponent();
             this.DataContext = new CreateCharacterViewModel();
         }
+
+        private void Create_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }

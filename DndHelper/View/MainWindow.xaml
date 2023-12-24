@@ -45,11 +45,13 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Path=ClassCharacter}"/>
-                                    <GridViewColumn Header="Race" DisplayMemberBinding="{Binding Path=Race}"/>
+                                    <GridViewColumn Header="Race" DisplayMemberBinding="{Binding Path=Race.Name}"/>
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                                     <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=Level}"/>
                                     <GridViewColumn Header="HP" DisplayMemberBinding="{Binding Path=CurrentHitPoints}"/>
                                     <GridViewColumn Header="" DisplayMemberBinding="{Binding Path=HitPoints}"/>
+                                    <GridViewColumn Header=""
+                                                    DisplayMemberBinding="{Binding Path=InitiativeCats}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -102,6 +104,7 @@
                                                    FontSize="15"/>
 
                                             <Button Content="{Binding Initiative}"
+                                                    Command="{Binding InitiativeCatsCommand, UpdateSourceTrigger=PropertyChanged}"
                                                     HorizontalAlignment="Center"
                                                     Padding="25,10,25,10"
                                                     FontSize="15"/>
