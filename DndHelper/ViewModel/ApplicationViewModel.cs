@@ -39,91 +39,74 @@ namespace DndHelper.ViewModel
             }
         }
 
-        private ObservableCollection<Character> filteredCharacters;
-        public ObservableCollection<Character> FilteredCharacters
-        {
-            get { return filteredCharacters; }
-            set
-            {
-                filteredCharacters = value;
-                OnPropertyChanged(nameof(FilteredCharacters));
-            }
-        }
-        private void Search()
-        {
-            if (string.IsNullOrEmpty(SearchCharacterString))
-            {
-                FilteredCharacters = Characters;
-            }
-            else
-            {
-                FilteredCharacters = new ObservableCollection<Character>(
-                    from character in Characters
-                    where
-                    character.Name.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase)
-                    orderby character.Name
-                    select character
-                    );
-            }
-        }
+        //private ObservableCollection<Character> filteredCharacters;
+        //public ObservableCollection<Character> FilteredCharacters
+        //{
+        //    get { return filteredCharacters; }
+        //    set
+        //    {
+        //        filteredCharacters = value;
+        //        OnPropertyChanged(nameof(FilteredCharacters));
+        //    }
+        //}
+        //private void Search()
+        //{
+        //    if (string.IsNullOrEmpty(SearchCharacterString))
+        //    {
+        //        FilteredCharacters = Characters;
+        //    }
+        //    else
+        //    {
+        //        FilteredCharacters = new ObservableCollection<Character>(
+        //            from character in Characters
+        //            where
+        //            character.Name.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase)
+        //            orderby character.Name
+        //            select character
+        //            );
+        //    }
+        //}
         
         public ObservableCollection<Character> Characters { get; set; }
 
         private RelayCommand addCharacterCommand;
-        public RelayCommand AddCharacterCommand
-        {
-            get
-            {
-                return addCharacterCommand ??
-                    (addCharacterCommand = new RelayCommand(obj =>
-                    {
-                        //Character character = new Character();
-                        //Characters.Add(character);
-                        //SelectedCharacter = character;
-                        // Создайте экземпляр ViewModel для окна создания персонажа
-                        CreateCharacterViewModel createCharacterViewModel = new CreateCharacterViewModel();
+        //public RelayCommand AddCharacterCommand
+        //{
+        //    get
+        //    {
+        //        return addCharacterCommand ??
+        //            (addCharacterCommand = new RelayCommand(obj =>
+        //            {
+        //                //Character character = new Character();
+        //                //Characters.Add(character);
+        //                //SelectedCharacter = character;
+        //                // Создайте экземпляр ViewModel для окна создания персонажа
+        //                CreateCharacterViewModel createCharacterViewModel = new CreateCharacterViewModel();
 
-                        // Создайте окно и установите DataContext
-                        CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow();
+        //                // Создайте окно и установите DataContext
+        //                CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow();
 
-                        // Установите текущее окно в качестве владельца
-                        createCharacterWindow.Owner = Application.Current.MainWindow;
+        //                // Установите текущее окно в качестве владельца
+        //                createCharacterWindow.Owner = Application.Current.MainWindow;
 
-                        // Откройте окно в модальном режиме (ShowDialog)
-                        bool? result = createCharacterWindow.ShowDialog();
+        //                // Откройте окно в модальном режиме (ShowDialog)
+        //                bool? result = createCharacterWindow.ShowDialog();
 
-                        // Если результат окна положительный (например, пользователь нажал "Создать"),
-                        // вы можете обновить коллекцию персонажей, если это необходимо.
-                        if (result == true)
-                        {
-                            Characters.Add(createCharacterViewModel.Character);
-                            SelectedCharacter = createCharacterViewModel.Character;
-                        }
-                    }));
-            }
-        }
-
-
-        private RelayCommand deleteCharacterCommand;
-        public RelayCommand DeleteCharacterCommand
-        {
-            get
-            {
-                return deleteCharacterCommand ??
-                    (deleteCharacterCommand = new RelayCommand(obj =>
-                    {
-                        Character character = new Character();
-                        Characters.Remove(character);
-                        SelectedCharacter = character;
-                    }));
-            }
-        }
-        
+        //                // Если результат окна положительный (например, пользователь нажал "Создать"),
+        //                // вы можете обновить коллекцию персонажей, если это необходимо.
+        //                if (result == true)
+        //                {
+        //                    Characters.Add(createCharacterViewModel.CreateCharacter());
+        //                    SelectedCharacter = createCharacterViewModel.SelectedClass;
+        //                }
+        //            }));
+        //    }
+        //}
 
         public ApplicationViewModel()
         {
             Characters = new ObservableCollection<Character>(DataContext.DataBase.Characters);
-            FilteredCharacters = Characters;
+            //FilteredCharacters = Characters;
 
             SelectedCharacter = Characters.First();
         }

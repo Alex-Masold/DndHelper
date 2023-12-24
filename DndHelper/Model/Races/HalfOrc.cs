@@ -11,7 +11,7 @@ namespace DndHelper.Model.Races
     {
         public HalfOrc()
         {
-            Name = "Half Orc";
+            Name = "Half-Orc";
 
             StrengthBonus = 2;
             DexterityBonus = 0;

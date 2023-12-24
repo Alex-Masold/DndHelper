@@ -1,48 +1,134 @@
-﻿using DndHelper.Model.Races;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using DndHelper.Model.Races;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace DndHelper.Model.Classes
-{
-
-    public class Fighter : Character
+    namespace DndHelper.Model.Classes
     {
-        public Fighter(
-            Race race = null, 
-            int StrengthValue = 10,
-            int DexterityValue = 10,
-            int ConstitutionValue = 10,
-            int IntelligenceValue = 10,
-            int WisdomValue = 10,
-            int CharismaValue = 10) : base()
+        public class Fighter : Character
         {
-            Race = race;
+            private Race race;
+            public new Race Race
+            {
+                get { return race; }
+                set
+                {
+                    race = value;
+                    if (value != null)
+                    {
+                        RaceStrengthBonus = race.StrengthBonus;
+                        RaceDexterityBonus = race.DexterityBonus;
+                        RaceConstitutionBonus = race.ConstitutionBonus;
+                        RaceIntelligenceBonus = race.IntelligenceBonus;
+                        RaceWisdomBonus = race.WisdomBonus;
+                        RaceCharismaBonus = race.CharismaBonus;
+                    }
+                
+
+                    OnPropertyChanged(nameof(Race));
+                }
+            }
+
+            private int raceStrengthBonus;
+            public int RaceStrengthBonus
+            {
+                get { return raceStrengthBonus; }
+                set
+                {
+                    raceStrengthBonus = value;
+                    OnPropertyChanged(nameof(RaceStrengthBonus));
+                }
+            }
+            private int raceDexterityBonus;
+            public int RaceDexterityBonus
+            {
+                get {return raceDexterityBonus;}
+                set
+                {
+                    raceDexterityBonus = value;
+                    OnPropertyChanged(nameof(RaceDexterityBonus));
+                }
+            }
+            private int raceConstitutionBonus;
+            public int RaceConstitutionBonus
+            {
+                get {return raceConstitutionBonus;}
+                set
+                {
+                    raceConstitutionBonus = value;
+                    OnPropertyChanged(nameof(RaceConstitutionBonus));
+                }
+            }
+            private int raceIntelligenceBonus;
+            public int RaceIntelligenceBonus
+            { 
+                get {return raceIntelligenceBonus;}
+                set
+                {
+                    raceIntelligenceBonus = value;
+                    OnPropertyChanged(nameof(RaceIntelligenceBonus));
+                }
+            }
+            private int raceWisdomBonus;
+            public int RaceWisdomBonus
+            {
+                get {return raceWisdomBonus;}
+                set
+                {
+                    raceWisdomBonus = value;
+                    OnPropertyChanged(nameof(RaceWisdomBonus));
+                }
+            }
+            private int raceCharismaBonus;
+            public int RaceCharismaBonus
+            {
+                get { return raceCharismaBonus;}
+                set
+                {
+                    raceCharismaBonus = value;
+                    OnPropertyChanged(nameof(RaceCharismaBonus));
+                }
+            }
+
+            public Fighter(
+                Race race = null, 
+                int strengthValue = 10,
+                int dexterityValue = 10,
+                int constitutionValue = 10,
+                int intelligenceValue = 10,
+                int wisdomValue = 10,
+                int charismaValue = 10) : base()
+            {
+                Race = race;
+
+                StrengthValue = strengthValue;
+                DexterityValue = dexterityValue;
+                ConstitutionValue = constitutionValue;
+                IntelligenceValue = intelligenceValue;
+                WisdomValue = wisdomValue;
+                CharismaValue = charismaValue;
+
+                Strength.Value = StrengthValue + RaceStrengthBonus;
+                Dexterity.Value = DexterityValue + RaceDexterityBonus;
+                Constitution.Value = ConstitutionValue + RaceConstitutionBonus;
+                Intelligence.Value = IntelligenceValue + RaceIntelligenceBonus;
+                Wisdom.Value = WisdomValue + RaceWisdomBonus;
+                Charisma.Value = CharismaValue + RaceCharismaBonus;
+
+                HitPointDice = new() { Count = 1, Type = 10 };
+                HitPoints = HitPointDice.Type + Constitution.Modifier;
+                CurrentHitPoints = HitPoints;
+                CurrentHitPointDice = HitPointDice.Count;
+                ClassCharacter = "Fighter";
+
+                //Abilities = new ObservableCollection<string> { "Shield", "Light armor", "Medium armor", "Heavy armor", "Простое Оружие", "Воинское оружие" };
+            }
+
             
-
-            Strength.Value = StrengthValue + Race.StrengthBonus;
-            Dexterity.Value = DexterityValue + Race.DexterityBonus;
-            Constitution.Value = ConstitutionValue + Race.ConstitutionBonus;
-            Intelligence.Value = IntelligenceValue + Race.IntelligenceBonus;
-            Wisdom.Value = WisdomValue + Race.WisdomBonus;
-            Charisma.Value = CharismaValue + Race.CharismaBonus;
-
-            HitPointDice = new() { Count = 1, Type = 10 };
-            HitPoints = HitPointDice.Type + Constitution.Modifier;
-            CurrentHitPoints = HitPoints;
-            CurrentHitPointDice = HitPointDice.Count;
-            ClassCharacter = "Fighter";
-
-            
-
-            
-
-            Traits = new ObservableCollection<Trait>(Race.Traits);
-
-            Abilities = new ObservableCollection<string> { "Shield", "Light armor", "Medium armor", "Heavy armor", "Простое Оружие", "Воинское оружие" };
         }
     }
-}

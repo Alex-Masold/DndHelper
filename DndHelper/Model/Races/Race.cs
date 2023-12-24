@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndHelper.Model.Stats;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

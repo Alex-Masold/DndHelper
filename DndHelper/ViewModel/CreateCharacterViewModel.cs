@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.TextFormatting;
 
 namespace DndHelper.ViewModel
 {
@@ -19,26 +20,8 @@ namespace DndHelper.ViewModel
         private ObservableCollection<string> races;
         private ObservableCollection<Character> classes;
 
-        public Character Character
-        {
-            get { return character; }
-            set
-            {
-                character = value;
-                OnPropertyChanged(nameof(Character));
-            }
-        }
         private Character selectedClass;
-        public Character SelectedClass
-        {
-            get { return selectedClass; }
-            set
-            {
-                selectedClass = value;
-                Character = value;
-                OnPropertyChanged(nameof(SelectedClass));
-            }
-        }
+        
         private Race selectedRace;
         public Race SelectedRace
         {
@@ -46,42 +29,80 @@ namespace DndHelper.ViewModel
             set
             {
                 selectedRace = value;
-                OnPropertyChanged(nameof(SelectedRace));
                 UpdateSelectedClassRace();
+                OnPropertyChanged(nameof(SelectedRace));
+            }
+        }
+        public Character SelectedClass
+        {
+            get { return selectedClass; }
+            set
+            {
+                selectedClass = value;
+                UpdateSelectedClassRace();
+                OnPropertyChanged(nameof(SelectedClass));
             }
         }
         public ObservableCollection<Race> Races { get; set; }
         public ObservableCollection<Character> Classes { get; set; }
 
+        private RelayCommand dialogTrueCommand;
+        //public RelayCommand DialogTrueCommand
+        //{
+        //    get
+        //    {
+        //        return dialogTrueCommand ?? (dialogTrueCommand = new RelayCommand(obj =>
+        //        {
+
+        //        }));
+        //    }
+        //}
+
         public CreateCharacterViewModel()
         {
-            Character = new Character();
+
             Races = new()
             {
-                new HalfOrc() {Character = SelectedClass},
-                new WoodElf() {Character = SelectedClass},
-                new HighElf() {Character = SelectedClass},
-                new Goblin()  {Character = SelectedClass}
+                new HalfOrc(),
+                new WoodElf(),
+                new HighElf(),
+                new Goblin()
             };
-
-            SelectedRace = Races.First();
 
             Classes = new ObservableCollection<Character>
             {
-                new Fighter(SelectedRace),
-                new Cleric(SelectedRace)
+                new Fighter(),
+                new Cleric()
                 // Добавьте другие классы по мере необходимости
             };
-
-            SelectedClass = Classes.First();
         }
+
         private void UpdateSelectedClassRace()
         {
-            if(SelectedClass != null)
-    {
+            if (SelectedClass != null && SelectedRace != null)
+            {
                 SelectedClass.Race = SelectedRace;
+                UpdateCharacterAttributes();
                 OnPropertyChanged(nameof(Classes));
             }
+        }
+
+        private void UpdateCharacterAttributes()
+        {
+            SelectedClass.Strength.Value = SelectedClass.StrengthValue + SelectedRace.StrengthBonus;
+            SelectedClass.Dexterity.Value = SelectedClass.DexterityValue + SelectedRace.DexterityBonus;
+            SelectedClass.Constitution.Value = SelectedClass.ConstitutionValue + SelectedRace.ConstitutionBonus;
+            SelectedClass.Intelligence.Value = SelectedClass.IntelligenceValue + SelectedRace.IntelligenceBonus;
+            SelectedClass.Wisdom.Value = SelectedClass.WisdomValue + SelectedRace.WisdomBonus;
+            SelectedClass.Charisma.Value = SelectedClass.CharismaValue + SelectedRace.CharismaBonus;
+
+            SelectedClass.Speed = SelectedRace.Speed;
+
+        }
+        
+        public Character CreateCharacter()
+        {
+            return SelectedClass;
         }
     }
 }

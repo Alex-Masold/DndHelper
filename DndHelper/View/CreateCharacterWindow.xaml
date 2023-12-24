@@ -18,6 +18,18 @@
         <TabControl Grid.RowSpan="1" Margin="2,0,2,0" Padding="10,10,10,10">
             <TabItem Header="Character">
                 <DockPanel>
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <WrapPanel>
+                            <Button x:Name="Create"
+                                    Content="Create"
+                                    IsDefault="True"
+                                    Margin="5,5,5,5"
+                                    Click="Create_Click" />
+                            <Button Content="Cancel"
+                                    IsCancel="True"
+                                    Margin="5,5,5,5"/>
+                        </WrapPanel>
+                    </DockPanel>
                     <DockPanel>
                         <Border DockPanel.Dock="Left"
                                 BorderBrush="Black"
@@ -33,7 +45,7 @@
                                                Margin="5,5,5,5"
                                                Padding="5,5,5,5" />
                                     <ComboBox ItemsSource="{Binding Races}"
-                                              SelectedItem="{Binding SelectedRace}"
+                                              SelectedItem="{Binding SelectedRace, UpdateSourceTrigger=PropertyChanged}"
                                               DisplayMemberPath="Name"
                                               Margin="5,0,5,0"
                                               Padding="1,1,1,1" />
@@ -43,7 +55,8 @@
                                                Margin="5,5,5,5"
                                                Padding="5,5,5,5" />
                                     <ComboBox ItemsSource="{Binding Classes}"
-                                              SelectedItem="{Binding SelectedClass}"
+                                              SelectedValue="{Binding SelectedClass}"
+                                              SelectedItem="{Binding SelectedClass, UpdateSourceTrigger=PropertyChanged}"
                                               DisplayMemberPath="ClassCharacter"
                                               Margin="5,0,5,0"
                                               Padding="1,1,1,1" />
@@ -51,174 +64,174 @@
                             </DockPanel>
                         </Border>
                     </DockPanel>
-
-                    <DockPanel DataContext="{Binding Character}">
+                    <DockPanel DataContext="{Binding SelectedClass}">
                         <Border BorderBrush="Black"
-                            BorderThickness="1"
-                            Margin="5,5,5,5"
-                            Padding="5,5,5,5">
-                        <DockPanel>
-                            <StackPanel DockPanel.Dock="Top">
-                                <DockPanel>
-                                    <DockPanel DockPanel.Dock="Left"
-                            Margin="5,5,5,5"
-                            VerticalAlignment="Center">
-                                        <TextBlock DockPanel.Dock="Top"
-                             Text="ARMOR"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-
-                                        <TextBlock DockPanel.Dock="Bottom"
-                             Text="{Binding ArmorClass}"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-                                        <TextBlock Text="ClASS"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-                                    </DockPanel>
-
-                                    <DockPanel DockPanel.Dock="Right"
-                           Margin="10,10,10,10"
-                           HorizontalAlignment="Center">
-
-                                        <TextBlock DockPanel.Dock="Top"
-                             Text="SPEED"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-
-                                        <TextBlock Text="{Binding Speed}"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 FontSize="15"/>
-
-                                    </DockPanel>
-
-                                    <DockPanel Margin="10,10,10,10">
-
-                                        <TextBlock DockPanel.Dock="Top"
-                             Text="INITITIVE"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-
-                                        <TextBlock Text="{Binding Initiative}"
-                              HorizontalAlignment="Center"
-                              FontSize="15"/>
-                                    </DockPanel>
-                                </DockPanel>
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Top"
-                           Text="Hit Points"
-                           HorizontalAlignment="Center"/>
-                                    <DockPanel DockPanel.Dock="Left"
-                           Margin="10,10,10,10"
-                           HorizontalAlignment="Center">
-
-                                        <TextBlock DockPanel.Dock="Top"
-                             Text="{Binding CurrentHitPoints}"
-                             HorizontalAlignment="Center"
-                             FontSize="15"/>
-
-                                        <TextBlock Text="Temp"
-                             FontSize="15"/>
-                                    </DockPanel>
-                                    <DockPanel DockPanel.Dock="Right"
-                           Margin="10,10,10,10"
-                           HorizontalAlignment="Center">
-                                        <TextBlock DockPanel.Dock="Top"
-                           Text="{Binding HitPoints}"
-                           HorizontalAlignment="Center"
-                           FontSize="15"/>
-                                        <TextBlock Text="Max"
-                             FontSize="15"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="10,10,10,10"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center">
-                                        <TextBlock DockPanel.Dock="Top"
-                             HorizontalAlignment="Center"
-                             FontSize="25"
-                             Text="/"/>
-                                    </DockPanel>
-                                </DockPanel>
-                                <DockPanel>
-                                    <DockPanel DockPanel.Dock="Left">
-                                        <TextBlock DockPanel.Dock="Top"
-                             HorizontalAlignment="Center"
-                             Text="Hit Dice"
-                             FontSize="15"/>
+                                BorderThickness="1"
+                                Margin="5,5,5,5"
+                                Padding="5,5,5,5">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top">
+                                    <DockPanel>
                                         <DockPanel DockPanel.Dock="Left"
-                             Margin="10,10,10,10"
-                             HorizontalAlignment="Center">
+                                                   Margin="5,5,5,5"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       Text="ARMOR"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+
+                                            <TextBlock DockPanel.Dock="Bottom"
+                                                       Text="{Binding ArmorClass}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+                                            <TextBlock Text="ClASS"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+                                        </DockPanel>
+
+                                        <DockPanel DockPanel.Dock="Right"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
 
                                             <TextBlock DockPanel.Dock="Top"
-                               Text="{Binding CurrentHitPointDice}"
-                               HorizontalAlignment="Center"
-                               FontSize="15"/>
+                                                       Text="SPEED"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+
+                                            <TextBlock Text="{Binding Speed}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="15" />
+
+                                        </DockPanel>
+
+                                        <DockPanel Margin="10,10,10,10">
+
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       Text="INITITIVE"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+
+                                            <TextBlock Text="{Binding Initiative}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
+                                        </DockPanel>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock DockPanel.Dock="Top"
+                                                   Text="Hit Points"
+                                                   HorizontalAlignment="Center" />
+                                        <DockPanel DockPanel.Dock="Left"
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
+
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       Text="{Binding CurrentHitPoints}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
 
                                             <TextBlock Text="Temp"
-                               FontSize="15"/>
+                                                       FontSize="15" />
                                         </DockPanel>
                                         <DockPanel DockPanel.Dock="Right"
-                             Margin="10,10,10,10"
-                             HorizontalAlignment="Center">
+                                                   Margin="10,10,10,10"
+                                                   HorizontalAlignment="Center">
                                             <TextBlock DockPanel.Dock="Top"
-                               Text="{Binding HitPointDice.Count }"
-                               HorizontalAlignment="Center"
-                               FontSize="15"/>
+                                                       Text="{Binding HitPoints}"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="15" />
                                             <TextBlock Text="Max"
-                               FontSize="15"/>
+                                                       FontSize="15" />
                                         </DockPanel>
                                         <DockPanel Margin="10,10,10,10"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center">
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center">
                                             <TextBlock DockPanel.Dock="Top"
-                               HorizontalAlignment="Center"
-                               FontSize="25"
-                               Text="/"/>
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="25"
+                                                       Text="/" />
                                         </DockPanel>
                                     </DockPanel>
-                                    <DockPanel DockPanel.Dock="Right">
-                                        <TextBlock DockPanel.Dock="Top"
-                             HorizontalAlignment="Center"
-                             Text="Death Saves"
-                             FontSize="15"/>
-                                        <DockPanel DockPanel.Dock="Left"
-                             Margin="10,10,10,10"
-                             HorizontalAlignment="Center">
-
+                                    <DockPanel>
+                                        <DockPanel DockPanel.Dock="Left">
                                             <TextBlock DockPanel.Dock="Top"
-                               Text="{Binding DeathSaveTrue}"
-                               HorizontalAlignment="Center"
-                               FontSize="15"/>
+                                                       HorizontalAlignment="Center"
+                                                       Text="Hit Dice"
+                                                       FontSize="15" />
+                                            <DockPanel DockPanel.Dock="Left"
+                                                       Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center">
 
-                                            <TextBlock Text="True"
-                               FontSize="15"/>
-                                        </DockPanel>
-                                        <DockPanel DockPanel.Dock="Right"
-                             Margin="10,10,10,10"
-                             HorizontalAlignment="Center">
-                                            <TextBlock DockPanel.Dock="Top"
-                               Text="{Binding DeathSaveFalse}"
-                               HorizontalAlignment="Center"
-                               FontSize="15"/>
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           Text="{Binding CurrentHitPointDice}"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="15" />
 
-                                            <TextBlock Text="False"
-                               FontSize="15"/>
+                                                <TextBlock Text="Temp"
+                                                           FontSize="15" />
+                                            </DockPanel>
+                                            <DockPanel DockPanel.Dock="Right"
+                                                       Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           Text="{Binding HitPointDice.Count }"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="15" />
+                                                <TextBlock Text="Max"
+                                                           FontSize="15" />
+                                            </DockPanel>
+                                            <DockPanel Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="25"
+                                                           Text="/" />
+                                            </DockPanel>
                                         </DockPanel>
-                                        <DockPanel Margin="10,10,10,10"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center">
+                                        <DockPanel DockPanel.Dock="Right">
                                             <TextBlock DockPanel.Dock="Top"
-                               HorizontalAlignment="Center"
-                               FontSize="25"
-                               Text="/"/>
+                                                       HorizontalAlignment="Center"
+                                                       Text="Death Saves"
+                                                       FontSize="15" />
+                                            <DockPanel DockPanel.Dock="Left"
+                                                       Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center">
+
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           Text="{Binding DeathSaveTrue}"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="15" />
+
+                                                <TextBlock Text="True"
+                                                           FontSize="15" />
+                                            </DockPanel>
+                                            <DockPanel DockPanel.Dock="Right"
+                                                       Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           Text="{Binding DeathSaveFalse}"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="15" />
+
+                                                <TextBlock Text="False"
+                                                           FontSize="15" />
+                                            </DockPanel>
+                                            <DockPanel Margin="10,10,10,10"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center">
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="25"
+                                                           Text="/" />
+                                            </DockPanel>
                                         </DockPanel>
+                                        <DockPanel></DockPanel>
                                     </DockPanel>
-                                    <DockPanel></DockPanel>
-                                </DockPanel>
-                            </StackPanel>
-                            <DockPanel DockPanel.Dock="Bottom" Margin="5,5,5,5">
-                                <ListBox  Name ="Traits"
+                                </StackPanel>
+                                <DockPanel DockPanel.Dock="Bottom"
+                                           Margin="5,5,5,5">
+                                    <!--<ListBox  Name ="Traits"
                                           ItemsSource ="{Binding Traits}" 
                                           ScrollViewer.CanContentScroll="True" 
                                           ScrollViewer.VerticalScrollBarVisibility="Hidden">
@@ -228,498 +241,496 @@
                                                            ToolTip="{Binding Description}" />
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
-                                    </ListBox>
+                                    </ListBox>-->
+                                </DockPanel>
                             </DockPanel>
-                        </DockPanel>
-                    </Border>
-                    <Border BorderBrush="Black"
-                            BorderThickness="1"
-                            Margin="5,5,5,5"
-                            Padding="5,5,5,5">
-                  <DockPanel>
-                    <Grid>
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                      </Grid.ColumnDefinitions>
-                      <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                      </Grid.RowDefinitions>
-                      <!--Сила-->
-                      <StackPanel Grid.Column="0"
-                                  Grid.Row="0"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Strength.Name}"
-                                     Margin="0,0,5,0"
-                                     FontWeight="Bold"/>
-
-                          <TextBlock Text="{Binding Strength.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Strength.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Strength.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Strength.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-
-                        <!--Навыки-->
-                        <WrapPanel Margin="10,5,0,0"
-                                   Background="{Binding Strength.Athletics.SkillBackground}">
-                          <TextBlock Text="{Binding Strength.Athletics.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Strength.Athletics.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Strength.Athletics.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                      </StackPanel>
-                      <!--Ловкость-->
-                      <StackPanel Grid.Column="1"
-                                  Grid.Row="0"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Dexterity.Name}"
-                                     Margin="0,0,5,0"
-                                     FontWeight="Bold"/>
-
-                          <TextBlock Text="{Binding Dexterity.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Dexterity.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Dexterity.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Dexterity.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-
-                        <!--Навыки-->
-
-                        <!--Акробатика-->
-                        <WrapPanel Margin="10,5,0,0"
-                                   Background="{Binding Dexterity.Acrobatics.SkillBackground}">
-
-                          <TextBlock Text="{Binding Dexterity.Acrobatics.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Dexterity.Acrobatics.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Dexterity.Acrobatics.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Ловкость рук-->
-                        <WrapPanel Margin="10,5,0,0"
-                                   Background="{Binding Dexterity.SleightOfHand.SkillBackground}">
-
-                        <TextBlock Text="{Binding Dexterity.SleightOfHand.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Dexterity.SleightOfHand.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Dexterity.SleightOfHand.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Скрытность-->
-                        <WrapPanel Margin="10,5,0,0"
-                                   Background="{Binding Dexterity.Stealth.SkillBackground}">
-                            
-                          <TextBlock Text="{Binding Dexterity.Stealth.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Dexterity.Stealth.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Dexterity.Stealth.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                      </StackPanel>
-                      <!--Телосложение-->
-                      <StackPanel Grid.Column="0"
-                                  Grid.Row="1"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Constitution.Name}"
-                                     FontWeight="Bold"
-                                     Margin="0,0,5,0"/>
-
-                          <TextBlock Text="{Binding Constitution.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Constitution.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:"
-                                       Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Constitution.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Constitution.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-                      </StackPanel>
-                      <!--Интелект-->
-                      <StackPanel Grid.Column="1"
-                                  Grid.Row="1"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Intelligence.Name}"
-                                     Margin="0,0,5,0"
-                                     FontWeight="Bold"/>
-
-                          <TextBlock Text="{Binding Intelligence.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Intelligence.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Intelligence.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Intelligence.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-
-                        <!--Навыки-->
-
-                        <!--Магия-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Intelligence.Arcana.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Intelligence.Arcana.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Intelligence.Arcana.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--История-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Intelligence.History.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Intelligence.History.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Intelligence.History.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Анализ-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Intelligence.Investigation.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Intelligence.Investigation.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Intelligence.Investigation.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Природа-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Intelligence.Nature.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Intelligence.Nature.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Intelligence.Nature.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Религия-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Intelligence.Religion.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Intelligence.Religion.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Intelligence.Religion.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                      </StackPanel>
-                      <!--Мудрость-->
-                      <StackPanel Grid.Column="0"
-                                  Grid.Row="2"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Wisdom.Name}"
-                                     Margin="0,0,5,0"
-                                     FontWeight="Bold"/>
-
-                          <TextBlock Text="{Binding Wisdom.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Wisdom.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Wisdom.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Wisdom.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-
-                        <!--Навыки-->
-
-                        <!--Уход за животными-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Wisdom.AnimalHandling.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Wisdom.AnimalHandling.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Wisdom.AnimalHandling.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Проницательность-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Wisdom.Insight.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Wisdom.Insight.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Wisdom.Insight.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Медицина-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Wisdom.Medicine.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Wisdom.Medicine.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Wisdom.Medicine.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Восприятие-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Wisdom.Perception.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Wisdom.Perception.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Wisdom.Perception.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Выживание-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Wisdom.Survival.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Wisdom.Survival.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Wisdom.Survival.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                      </StackPanel>
-                      <!--Харизма-->
-                      <StackPanel Grid.Column="1"
-                                  Grid.Row="2"
-                                  Margin="5,5,0,10">
-
-                        <!--Имя характеристики и ее значение-->
-                        <WrapPanel>
-                          <TextBlock Text="{Binding Charisma.Name}"
-                                     Margin="0,0,5,0"
-                                     FontWeight="Bold"/>
-
-                          <TextBlock Text="{Binding Charisma.Value}"
-                                     Margin="0,0,5,0"/>
-                        </WrapPanel>
-
-                        <!--Проверка и Спасбросок-->
-                        <WrapPanel>
-                          <WrapPanel>
-                            <TextBlock Text="Проверка:"
-                                       Margin="0,0,5,0"/>
-
-                            <TextBlock Text ="{Binding Charisma.Modifier}"
-                                    Padding="5,0,5,0"
-                                    Margin="0,0,5,0"/>
-                          </WrapPanel>
-
-                          <WrapPanel>
-                            <TextBlock Text="СпасБросок:" Margin="0,0,5,0"/>
-                            <WrapPanel>
-                              <TextBlock Text="{Binding Charisma.SavingThrows.Modifier}"
-                                      Padding="5,0,5,0"
-                                      Margin="0,0,5,0"/>
-
-                              <CheckBox IsChecked="{Binding Charisma.SavingThrows.Proficient, Mode=TwoWay}"
-                                        FontStyle="Italic"
-                                        Margin="0,0,5,0"/>
-                            </WrapPanel>
-                          </WrapPanel>
-                        </WrapPanel>
-
-                        <!--Навыки-->
-
-                        <!--Обман-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Charisma.Deception.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Charisma.Deception.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Charisma.Deception.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Устрашение-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Charisma.Intimidation.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Charisma.Intimidation.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Charisma.Intimidation.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Представление-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Charisma.Performance.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Charisma.Performance.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Charisma.Performance.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                        <!--Убеждение-->
-                        <WrapPanel Margin="10,5,0,0">
-                          <TextBlock Text="{Binding Charisma.Persuasion.Modifier}"
-                                  Padding="5,0,5,0"
-                                  Margin="0,0,5,0"/>
-
-                          <CheckBox IsChecked="{Binding Charisma.Persuasion.Proficient, Mode=TwoWay}"
-                                    Content="{Binding Charisma.Persuasion.Name}"
-                                    FontStyle="Italic"
-                                    Margin="0,0,5,0"/>
-                        </WrapPanel>
-                      </StackPanel>
-                    </Grid>
-                  </DockPanel>
-                </Border>
+                        </Border>
+                        <Border BorderBrush="Black"
+                                BorderThickness="1"
+                                Margin="5,5,5,5"
+                                Padding="5,5,5,5">
+                            <DockPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <!--Сила-->
+                                    <StackPanel Grid.Column="0"
+                                                Grid.Row="0"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Strength.Name}"
+                                                       Margin="0,0,5,0"
+                                                       FontWeight="Bold" />
+
+                                            <TextBlock Text="{Binding Strength.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Strength.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Strength.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Strength.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+
+                                        <!--Навыки-->
+                                        <WrapPanel Margin="10,5,0,0"
+                                                   Background="{Binding Strength.Athletics.SkillBackground}">
+                                            <TextBlock Text="{Binding Strength.Athletics.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Strength.Athletics.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Strength.Athletics.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <!--Ловкость-->
+                                    <StackPanel Grid.Column="1"
+                                                Grid.Row="0"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Dexterity.Name}"
+                                                       Margin="0,0,5,0"
+                                                       FontWeight="Bold" />
+
+                                            <TextBlock Text="{Binding Dexterity.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Dexterity.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Dexterity.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Dexterity.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+
+                                        <!--Навыки-->
+
+                                        <!--Акробатика-->
+                                        <WrapPanel Margin="10,5,0,0"
+                                                   Background="{Binding Dexterity.Acrobatics.SkillBackground}">
+
+                                            <TextBlock Text="{Binding Dexterity.Acrobatics.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Dexterity.Acrobatics.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Dexterity.Acrobatics.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Ловкость рук-->
+                                        <WrapPanel Margin="10,5,0,0"
+                                                   Background="{Binding Dexterity.SleightOfHand.SkillBackground}">
+
+                                            <TextBlock Text="{Binding Dexterity.SleightOfHand.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Dexterity.SleightOfHand.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Dexterity.SleightOfHand.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Скрытность-->
+                                        <WrapPanel Margin="10,5,0,0"
+                                                   Background="{Binding Dexterity.Stealth.SkillBackground}">
+
+                                            <TextBlock Text="{Binding Dexterity.Stealth.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Dexterity.Stealth.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Dexterity.Stealth.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <!--Телосложение-->
+                                    <StackPanel Grid.Column="0"
+                                                Grid.Row="1"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Constitution.Name}"
+                                                       FontWeight="Bold"
+                                                       Margin="0,0,5,0" />
+
+                                            <TextBlock Text="{Binding Constitution.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Constitution.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Constitution.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Constitution.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <!--Интелект-->
+                                    <StackPanel Grid.Column="1"
+                                                Grid.Row="1"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Intelligence.Name}"
+                                                       Margin="0,0,5,0"
+                                                       FontWeight="Bold" />
+
+                                            <TextBlock Text="{Binding Intelligence.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Intelligence.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Intelligence.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Intelligence.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+
+                                        <!--Навыки-->
+
+                                        <!--Магия-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Intelligence.Arcana.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Intelligence.Arcana.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Intelligence.Arcana.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--История-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Intelligence.History.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Intelligence.History.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Intelligence.History.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Анализ-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Intelligence.Investigation.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Intelligence.Investigation.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Intelligence.Investigation.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Природа-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Intelligence.Nature.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Intelligence.Nature.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Intelligence.Nature.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Религия-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Intelligence.Religion.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Intelligence.Religion.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Intelligence.Religion.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                    </StackPanel>
+                                    <!--Мудрость-->
+                                    <StackPanel Grid.Column="0"
+                                                Grid.Row="2"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Wisdom.Name}"
+                                                       Margin="0,0,5,0"
+                                                       FontWeight="Bold" />
+
+                                            <TextBlock Text="{Binding Wisdom.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Wisdom.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Wisdom.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Wisdom.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+
+                                        <!--Навыки-->
+
+                                        <!--Уход за животными-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Wisdom.AnimalHandling.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Wisdom.AnimalHandling.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Wisdom.AnimalHandling.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Проницательность-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Wisdom.Insight.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Wisdom.Insight.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Wisdom.Insight.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Медицина-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Wisdom.Medicine.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Wisdom.Medicine.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Wisdom.Medicine.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Восприятие-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Wisdom.Perception.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Wisdom.Perception.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Wisdom.Perception.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Выживание-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Wisdom.Survival.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Wisdom.Survival.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Wisdom.Survival.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                    </StackPanel>
+                                    <!--Харизма-->
+                                    <StackPanel Grid.Column="1"
+                                                Grid.Row="2"
+                                                Margin="5,5,0,10">
+
+                                        <!--Имя характеристики и ее значение-->
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Charisma.Name}"
+                                                       Margin="0,0,5,0"
+                                                       FontWeight="Bold" />
+
+                                            <TextBlock Text="{Binding Charisma.Value}"
+                                                       Margin="0,0,5,0" />
+                                        </WrapPanel>
+
+                                        <!--Проверка и Спасбросок-->
+                                        <WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Проверка:"
+                                                           Margin="0,0,5,0" />
+
+                                                <TextBlock Text="{Binding Charisma.Modifier}"
+                                                           Padding="5,0,5,0"
+                                                           Margin="0,0,5,0" />
+                                            </WrapPanel>
+
+                                            <WrapPanel>
+                                                <TextBlock Text="СпасБросок:"
+                                                           Margin="0,0,5,0" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Charisma.SavingThrows.Modifier}"
+                                                               Padding="5,0,5,0"
+                                                               Margin="0,0,5,0" />
+
+                                                    <CheckBox IsChecked="{Binding Charisma.SavingThrows.Proficient, Mode=TwoWay}"
+                                                              FontStyle="Italic"
+                                                              Margin="0,0,5,0" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </WrapPanel>
+
+                                        <!--Навыки-->
+
+                                        <!--Обман-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Charisma.Deception.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Charisma.Deception.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Charisma.Deception.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Устрашение-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Charisma.Intimidation.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Charisma.Intimidation.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Charisma.Intimidation.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Представление-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Charisma.Performance.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Charisma.Performance.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Charisma.Performance.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                        <!--Убеждение-->
+                                        <WrapPanel Margin="10,5,0,0">
+                                            <TextBlock Text="{Binding Charisma.Persuasion.Modifier}"
+                                                       Padding="5,0,5,0"
+                                                       Margin="0,0,5,0" />
+
+                                            <CheckBox IsChecked="{Binding Charisma.Persuasion.Proficient, Mode=TwoWay}"
+                                                      Content="{Binding Charisma.Persuasion.Name}"
+                                                      FontStyle="Italic"
+                                                      Margin="0,0,5,0" />
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DockPanel>
+                        </Border>
+                    </DockPanel>
                 </DockPanel>
-                </DockPanel>
-                
-                
-                
-              
-            </TabItem>
-            <TabItem Header="Stats">
-                
             </TabItem>
         </TabControl>
     </Grid>
