@@ -132,5 +132,6 @@ namespace DndHelper.Model.Races
                 OnPropertyChanged(nameof(CharismaBonus));
             }
         }
+       
     }
 }

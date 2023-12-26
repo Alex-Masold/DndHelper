@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using DndHelper.ViewModel;
 
 namespace DndHelper.Model.Stats
 {
@@ -53,12 +54,8 @@ namespace DndHelper.Model.Stats
                     // Текст сообщения
                     TextBlock messageText = new TextBlock();
                     messageText.Text = Cast();
+                    ApplicationViewModel.Log.Add($"{Character.Name}: {messageText.Text}");
                     messageText.Padding = new Thickness(5, 10, 5, 10);
-
-                    // Кнопка для закрытия Popup
-                    Button closeButton = new Button();
-                    closeButton.Content = "Закрыть";
-                    closeButton.Click += (sender, e) => { messagePopup.IsOpen = false; };
 
                     // Добавление элементов в Border
                     popupBorder.Child = messageText;

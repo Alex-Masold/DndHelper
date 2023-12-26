@@ -16,6 +16,8 @@ namespace DndHelper.DataContext
 {
     public class DataBase
     {
+        private static Random Random = new();
+
         public static List<int> DefultValue = new() { 15, 14, 13, 12, 10, 8 };
         //public static ObservableCollection<string> Classes = new()
         //{
@@ -110,38 +112,140 @@ namespace DndHelper.DataContext
 
         public static ObservableCollection<Character> Characters = new()
         {
-            new Fighter(new WoodElf(), 15, 16, 15, 8, 8, 10)
+            new Fighter(new WoodElf(), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1))
             {
                 Name = "Биба",
-                Level = 1
+                Level = Random.Next(1, 21),
+                IsFriend = true
+
             },
-            new Cleric(new Goblin(), 10, 12, 15, 15, 18, 10)
+            new Cleric(new HighElf(), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1))
             {
                 Name = "мех",
-                Level = 1
+                IsFriend = true,
+                Level = Random.Next(1, 21)
             },
-             new Cleric(new HalfOrc())
+             new Cleric(new HalfOrc(), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1))
             {
                 Name = "мого",
-                Level = 1,
+                IsFriend = true,
+                Level = Random.Next(1, 21),
+
+            },
+             new Fighter(new WoodElf(), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1))
+            {
+                Name = "Боба",
+                Level = Random.Next(1, 21),
+                IsFriend = true
+
+            },
+            new Cleric(new Goblin(), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1))
+            {
+                Name = "Ра",
+                IsFriend = true,
+                Level = Random.Next(1, 21)
+            },
+             new Cleric(new HalfOrc(), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1))
+            {
+                Name = "Яче",
+                IsFriend = true,
+                Level = Random.Next(1, 21),
+
+            },new Fighter(new WoodElf(), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1))
+            {
+                Name = "Фрирен",
+                Level = Random.Next(1, 21),
+                IsFriend = true
+
+            },
+            new Cleric(new Goblin(),
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1), 
+                Random.Next(8, 18 + 1))
+            {
+                Name = "Ирза",
+                IsFriend = true,
+                Level = Random.Next(1, 21)
+            },
+             new Cleric(new HalfOrc(), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1), 
+                 Random.Next(8, 18 + 1))
+            {
+                Name = "Литвинова",
+                IsFriend = true,
+                Level = Random.Next(1, 21),
 
             },
         };
         public static ObservableCollection<Template> Enemies = new()
         {
-            new Template()
+            new Template(8, 14, 10, 10, 8, 8)
             {
                 Name = "Goblin",
                 Level = 0,
+                IsFriend = false,
+
                 ArmorClass = 15,
                 HitPointDice = new Dice() {Type = 6, Count = 2},
 
-                Strength = new Strength { Value = 8 },
-                Dexterity = new Dexterity { Value = 14 },
-                Constitution = new Constitution { Value = 10 },
-                Intelligence = new Intelligence { Value = 10 },
-                Wisdom = new Wisdom { Value = 8 },
-                Charisma = new Charisma { Value = 8 },
+            },
+            new Template(30, 20, 50, 10 ,8, 8)
+            {
+                Name = "Dragon",
+                Level = 0,
+                IsFriend = false,
+
+                ArmorClass = 15,
+                HitPointDice = new Dice() {Type = 13, Count = 20},
 
             },
         };

@@ -12,6 +12,13 @@ using System.Xml.Linq;
     {
         public class Fighter : Character
         {
+            private Random random = new Random();
+
+            private ObservableCollection<Skill> ClassSkills;
+
+            private Skill FirstSkill;
+            private Skill SecondSkill;
+
             private Race race;
             public new Race Race
             {
@@ -95,6 +102,7 @@ using System.Xml.Linq;
                 }
             }
 
+
             public Fighter(
                 Race race = null, 
                 int strengthValue = 10,
@@ -105,6 +113,7 @@ using System.Xml.Linq;
                 int charismaValue = 10) : base()
             {
                 Race = race;
+                Race.Character = this;
 
                 StrengthValue = strengthValue;
                 DexterityValue = dexterityValue;
@@ -124,9 +133,18 @@ using System.Xml.Linq;
                 HitPoints = HitPointDice.Type + Constitution.Modifier;
                 CurrentHitPoints = HitPoints;
                 CurrentHitPointDice = HitPointDice.Count;
+                Strength.SavingThrows.Proficient = true;
+                Constitution.SavingThrows.Proficient = true;
                 ClassCharacter = "Fighter";
 
-                //Abilities = new ObservableCollection<string> { "Shield", "Light armor", "Medium armor", "Heavy armor", "Простое Оружие", "Воинское оружие" };
+                // Случайные навыки
+                ClassSkills = new ObservableCollection<Skill>()
+                {
+                    Strength.Athletics, Dexterity.Acrobatics, Wisdom.Perception, Wisdom.Survival, Charisma.Intimidation, Intelligence.History, Wisdom.Insight, Wisdom.AnimalHandling
+                };
+
+                ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
+                ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
             }
 
             

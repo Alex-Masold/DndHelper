@@ -41,15 +41,14 @@ namespace DndHelper.Model
             }
         }
 
-
-        private bool bardicInspiration;
-        public bool BardicInspiration
+        private bool isFriend;
+        public bool IsFriend
         {
-            get { return bardicInspiration; }
+            get { return isFriend; }
             set
             {
-                bardicInspiration = value;
-                OnPropertyChanged(nameof(BardicInspiration));
+                isFriend = value;
+                OnPropertyChanged(nameof(IsFriend));
             }
         }
 
@@ -69,7 +68,47 @@ namespace DndHelper.Model
         private int hitPoints;
         public int HitPoints
         {
-            get { return hitPoints = HitPointDice.Cast(); }
+            get { return hitPoints; }
+            set
+            {
+                hitPoints = value;
+                CurrentHitPoints = value;
+                OnPropertyChanged(nameof(HitPoints));
+            }
+        }
+
+        private int currentHitPoints;
+        public int CurrentHitPoints
+        {
+            get { return currentHitPoints; }
+            set
+            {
+                currentHitPoints = value;
+                OnPropertyChanged(nameof(CurrentHitPoints));
+            }
+        }
+
+
+        private int deathSaveTrue = 0;
+        public int DeathSaveTrue
+        {
+            get { return deathSaveTrue; }
+            set
+            {
+                deathSaveTrue = value;
+                OnPropertyChanged(nameof(DeathSaveTrue));
+            }
+        }
+
+        private int deathSaveFalse = 0;
+        public int DeathSaveFalse
+        {
+            get { return deathSaveFalse; }
+            set
+            {
+                deathSaveFalse = value;
+                OnPropertyChanged(nameof(DeathSaveFalse));
+            }
         }
 
         private int armorClass;
@@ -145,81 +184,7 @@ namespace DndHelper.Model
             }
         }
 
-        private RelayCommand initiativeCatsCommand;
-        public RelayCommand InitiativeCatsCommand
-        {
-            get
-            {
-                return initiativeCatsCommand ?? (initiativeCatsCommand = new RelayCommand(obj =>
-                {
-                    // Создание объекта Popup
-                    Popup messagePopup = new Popup();
-
-                    messagePopup.StaysOpen = false;
-
-                    // Текст сообщения
-                    messagePopup.PlacementTarget = Application.Current.MainWindow;
-
-                    // Создание объекта Border для стилизации внешнего вида Popup
-                    Border popupBorder = new Border();
-                    popupBorder.Background = Brushes.White; // Цвет фона
-                    popupBorder.BorderBrush = Brushes.Black; // Цвет границы 
-                    popupBorder.BorderThickness = new Thickness(1); // Толщина границы
-
-                    // Текст сообщения
-                    TextBlock messageText = new TextBlock();
-                    InitiativeCats = D20.Cast();
-                    messageText.Text = $"{Name}: Бросок инициативы - {InitiativeCats}";
-                    messageText.Padding = new Thickness(5, 10, 5, 10);
-
-                    // Кнопка для закрытия Popup
-                    Button closeButton = new Button();
-                    closeButton.Content = "Закрыть";
-                    closeButton.Click += (sender, e) => { messagePopup.IsOpen = false; };
-
-                    // Добавление элементов в Border
-                    popupBorder.Child = messageText;
-
-                    // Установка Border в качестве содержимого Popup
-                    messagePopup.Child = popupBorder;
-
-                    messagePopup.Placement = PlacementMode.Custom;
-                    // Установка пользовательского расположения
-                    messagePopup.CustomPopupPlacementCallback = (popupSize, targetSize, offset) =>
-                    {
-                        // Расположение в правом нижнем углу
-                        double x = targetSize.Width - popupSize.Width * 1.5;
-                        double y = targetSize.Height - popupSize.Height * 3;
-
-                        return new[] { new CustomPopupPlacement(new Point(x, y), PopupPrimaryAxis.None) };
-                    };
-
-
-                    messagePopup.IsOpen = true;
-
-
-                    // Создайте таймер
-                    DispatcherTimer timer = new DispatcherTimer();
-
-                    // Установите интервал таймера в 10 секунд
-                    timer.Interval = TimeSpan.FromSeconds(3);
-
-                    // Обработчик события таймера
-                    timer.Tick += (sender, e) =>
-                    {
-                        // Закрыть Popup после истечения времени
-                        messagePopup.IsOpen = false;
-
-                        // Остановить таймер
-                        timer.Stop();
-                    };
-
-                    // Запустите таймер
-                    timer.Start();
-                }));
-            }
-        }
-
+       
 
         private Strength strength;
         private int strengthValue;
@@ -367,37 +332,9 @@ namespace DndHelper.Model
             set
             {
                 hitPointDice = value;
+                HitPoints = hitPointDice.Cast();
                 OnPropertyChanged(nameof(HitPointDice));
             }
-        }
-
-        //private List<> attacks;
-        private ObservableCollection<string> equipment;
-        public ObservableCollection<string> Equipment
-        {
-            get { return equipment; }
-            set
-            {
-                equipment = value;
-                OnPropertyChanged(nameof(Equipment));
-            }
-        }
-
-        private ObservableCollection<Trait> traits;
-        public ObservableCollection<Trait> Traits
-        {
-            get { return traits; }
-            set
-            {
-                traits = value;
-                OnPropertyChanged(nameof(Traits));
-            }
-        }
-
-        private Dice d20 = new Dice() { Count = 1, Type =20 };
-        public Dice D20
-        {
-            get { return d20; }
         }
 
         public Template(
@@ -427,9 +364,6 @@ namespace DndHelper.Model
             Speed = 30;
             PassivePerception = 10;
             Initiative = 0;
-
-            //HitPointDice = null;
-            BardicInspiration = false;
 
         }
         public void UpdateMasteryBonus()
