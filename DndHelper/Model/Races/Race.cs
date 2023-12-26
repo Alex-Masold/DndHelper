@@ -45,28 +45,6 @@ namespace DndHelper.Model.Races
             }
         }
 
-        private ObservableCollection<Trait> traits;
-        public ObservableCollection<Trait> Traits
-        {
-            get { return traits; }
-            set
-            {
-                traits = value;
-                OnPropertyChanged(nameof(Trait));
-            }
-        }
-
-        private ObservableCollection<string> abilities;
-        public ObservableCollection<string> Abilities
-        {
-            get { return abilities; }
-            set
-            {
-                abilities = value;
-                OnPropertyChanged(nameof(Abilities));
-            }
-        }
-
         private int strengthBonus;
         public int StrengthBonus
         {

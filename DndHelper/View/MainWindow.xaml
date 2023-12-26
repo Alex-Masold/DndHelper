@@ -757,7 +757,8 @@
                     <StackPanel DockPanel.Dock="Bottom"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Bottom"
-                                Height="50">
+                                Height="50"
+                                HorizontalAlignment="Center">
                         <Button Content="End Turn"
                                 Command="{Binding EndTurnCommand}"
                                 Width="100"
