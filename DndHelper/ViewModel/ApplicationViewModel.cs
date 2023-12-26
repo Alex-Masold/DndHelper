@@ -95,6 +95,7 @@ namespace DndHelper.ViewModel
                         if (IsDead.IsFriend == false)
                         {
                             MessageBox.Show($"{IsDead.Name} мертв");
+                            Log.Add($"{IsDead.Name} умер");
                             InBattle.Remove(IsDead);
                         }
                         else
@@ -115,6 +116,7 @@ namespace DndHelper.ViewModel
                                 if (IsDead.DeathSaveFalse == 3)
                                 {
                                     MessageBox.Show($"{IsDead.Name} умер");
+                                    Log.Add($"{IsDead.Name} умер");
                                     InBattle.Remove(IsDead);
                                 }
                             }
