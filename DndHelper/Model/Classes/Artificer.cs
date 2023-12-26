@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DndHelper.Model.Classes
 {
-    public class Cleric : Character
+    public class Artificer : Character
     {
         private Random random = new Random();
 
@@ -98,7 +98,7 @@ namespace DndHelper.Model.Classes
         }
 
 
-        public Cleric(
+        public Artificer(
             Race race = null,
             int strengthValue = 10,
             int dexterityValue = 10,
@@ -129,23 +129,20 @@ namespace DndHelper.Model.Classes
             CurrentHitPoints = HitPoints;
             CurrentHitPointDice = HitPointDice.Count;
 
-            Wisdom.SavingThrows.Proficient = true;
-            Charisma.SavingThrows.Proficient = true;
+            Intelligence.SavingThrows.Proficient = true;
+            Constitution.SavingThrows.Proficient = true;
 
-            ClassCharacter = "Ceric";
+            ClassCharacter = "Artificer";
 
             // Случайные навыки
             ClassSkills = new ObservableCollection<Skill>()
                 {
-                    Wisdom.Perception, Intelligence.History, Wisdom.Medicine, Wisdom.Insight, Intelligence.Religion, Charisma.Persuasion
+                    Intelligence.Arcana,Intelligence.History, Intelligence.Investigation, Intelligence.Nature, Wisdom.Medicine, Wisdom.Perception, Dexterity.SleightOfHand
                 };
 
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
         }
-        public void LevelUpdate()
-        {
-
-        }
+       
     }
 }

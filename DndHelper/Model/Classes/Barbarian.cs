@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DndHelper.Model.Classes
 {
-    public class Cleric : Character
+    public class Barbarian : Character
     {
         private Random random = new Random();
 
@@ -98,7 +98,7 @@ namespace DndHelper.Model.Classes
         }
 
 
-        public Cleric(
+        public Barbarian(
             Race race = null,
             int strengthValue = 10,
             int dexterityValue = 10,
@@ -124,28 +124,26 @@ namespace DndHelper.Model.Classes
             Wisdom.Value = WisdomValue + RaceWisdomBonus;
             Charisma.Value = CharismaValue + RaceCharismaBonus;
 
-            HitPointDice = new() { Count = 1, Type = 8 };
+            HitPointDice = new() { Count = 1, Type = 12 };
             HitPoints = HitPointDice.Type + Constitution.Modifier;
             CurrentHitPoints = HitPoints;
             CurrentHitPointDice = HitPointDice.Count;
+            ArmorClass = HitPointDice.Type + Dexterity.Modifier + Constitution.Modifier;
 
-            Wisdom.SavingThrows.Proficient = true;
-            Charisma.SavingThrows.Proficient = true;
+            Strength.SavingThrows.Proficient = true;
+            Constitution.SavingThrows.Proficient = true;
 
-            ClassCharacter = "Ceric";
+            ClassCharacter = "Barbarian";
 
             // Случайные навыки
             ClassSkills = new ObservableCollection<Skill>()
                 {
-                    Wisdom.Perception, Intelligence.History, Wisdom.Medicine, Wisdom.Insight, Intelligence.Religion, Charisma.Persuasion
+                    Wisdom.Perception, Strength.Athletics, Wisdom.Survival, Intelligence.Nature, Charisma.Intimidation
                 };
 
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
         }
-        public void LevelUpdate()
-        {
-
-        }
+       
     }
 }

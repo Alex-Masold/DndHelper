@@ -137,7 +137,7 @@ namespace DndHelper.DataContext
                 IsFriend = true,
                 Level = Random.Next(1, 21)
             },
-             new Cleric(new HalfOrc(), 
+             new Bard(new HalfOrc(), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
@@ -150,7 +150,7 @@ namespace DndHelper.DataContext
                 Level = Random.Next(1, 21),
 
             },
-             new Fighter(new WoodElf(), 
+             new Barbarian(new WoodElf(), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
@@ -163,7 +163,7 @@ namespace DndHelper.DataContext
                 IsFriend = true
 
             },
-            new Cleric(new Goblin(), 
+            new Monk(new Goblin(), 
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
@@ -175,7 +175,7 @@ namespace DndHelper.DataContext
                 IsFriend = true,
                 Level = Random.Next(1, 21)
             },
-             new Cleric(new HalfOrc(), 
+             new Druid(new HalfOrc(), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
@@ -187,7 +187,7 @@ namespace DndHelper.DataContext
                 IsFriend = true,
                 Level = Random.Next(1, 21),
 
-            },new Fighter(new WoodElf(), 
+            },new Rogue(new WoodElf(), 
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
@@ -200,7 +200,7 @@ namespace DndHelper.DataContext
                 IsFriend = true
 
             },
-            new Cleric(new Goblin(),
+            new Warlock(new Goblin(),
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
                 Random.Next(8, 18 + 1), 
@@ -212,7 +212,7 @@ namespace DndHelper.DataContext
                 IsFriend = true,
                 Level = Random.Next(1, 21)
             },
-             new Cleric(new HalfOrc(), 
+             new Paladin(new HalfOrc(), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 
                  Random.Next(8, 18 + 1), 

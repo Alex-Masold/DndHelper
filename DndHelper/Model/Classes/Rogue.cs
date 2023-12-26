@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DndHelper.Model.Classes
 {
-    public class Cleric : Character
+    public class Rogue : Character
     {
         private Random random = new Random();
 
@@ -98,7 +98,7 @@ namespace DndHelper.Model.Classes
         }
 
 
-        public Cleric(
+        public Rogue(
             Race race = null,
             int strengthValue = 10,
             int dexterityValue = 10,
@@ -129,23 +129,22 @@ namespace DndHelper.Model.Classes
             CurrentHitPoints = HitPoints;
             CurrentHitPointDice = HitPointDice.Count;
 
-            Wisdom.SavingThrows.Proficient = true;
-            Charisma.SavingThrows.Proficient = true;
+            Dexterity.SavingThrows.Proficient = true;
+            Intelligence.SavingThrows.Proficient = true;
 
-            ClassCharacter = "Ceric";
+            ClassCharacter = "Rogue";
 
             // Случайные навыки
             ClassSkills = new ObservableCollection<Skill>()
                 {
-                    Wisdom.Perception, Intelligence.History, Wisdom.Medicine, Wisdom.Insight, Intelligence.Religion, Charisma.Persuasion
+                    Dexterity.Acrobatics, Intelligence.Investigation, Strength.Athletics,Wisdom.Perception, Charisma.Performance, Charisma.Intimidation, Dexterity.SleightOfHand, Charisma.Deception, Wisdom.Insight, Dexterity.Stealth, Charisma.Persuasion
                 };
 
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
+            ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true; 
+            ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
         }
-        public void LevelUpdate()
-        {
-
-        }
+       
     }
 }

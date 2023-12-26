@@ -25,6 +25,141 @@ namespace DndHelper.Model
             }
         }
 
+        private int level;
+        public new int Level
+        {
+            get { return level; }
+            set
+            {
+                level = value;
+                switch (value)
+                {
+                    case 1:
+                        HitPointDice.Count = 1;
+                        HitPoints = HitPointDice.Type + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 2:
+                        HitPointDice.Count = 2;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 3:
+                        HitPointDice.Count = 3;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 4:
+                        HitPointDice.Count = 4;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 5:
+                        HitPointDice.Count = 5;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 6:
+                        HitPointDice.Count = 6;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 7:
+                        HitPointDice.Count = 7;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 8:
+                        HitPointDice.Count = 8;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 9:
+                        HitPointDice.Count = 9;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count; 
+                        break;
+                    case 10:
+                        HitPointDice.Count = 10;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 11:
+                        HitPointDice.Count = 11;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 12:
+                        HitPointDice.Count = 12;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 13:
+                        HitPointDice.Count = 13;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 14:
+                        HitPointDice.Count = 14;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 15:
+                        HitPointDice.Count = 15;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 16:
+                        HitPointDice.Count = 16;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 17:
+                        HitPointDice.Count = 17;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 18:
+                        HitPointDice.Count = 18;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 19:
+                        HitPointDice.Count = 19;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+                    case 20:
+                        HitPointDice.Count = 20;
+                        HitPoints = HitPointDice.Cast() + Constitution.Modifier;
+                        CurrentHitPoints = HitPoints;
+                        CurrentHitPointDice = HitPointDice.Count;
+                        break;
+
+                }
+                OnPropertyChanged(nameof(Level));
+                UpdateMasteryBonus();
+            }
+        }
 
         private int hitPoints;
         public new int HitPoints
@@ -48,19 +183,6 @@ namespace DndHelper.Model
             }
         }
 
-
-        //private bool masteryinspiration = false;
-        //public bool MasteryInspiration
-        //{
-        //    get { return masteryinspiration; }
-        //    set
-        //    {
-        //        masteryinspiration = value;
-        //        OnPropertyChanged(nameof(MasteryInspiration));
-        //    }
-        //}
-
-
         private string classCharacter;
         public string ClassCharacter
         {
@@ -72,17 +194,6 @@ namespace DndHelper.Model
                 UpdateMasteryBonus();
             }
         }
-
-        //private string archetype;
-        //public string Archetype
-        //{
-        //    get { return archetype; }
-        //    set
-        //    {
-        //        archetype = value;
-        //        OnPropertyChanged(nameof(Archetype));
-        //    }
-        //}
 
         private ObservableCollection<string> abilities;
         public ObservableCollection<string> Abilities
@@ -109,11 +220,6 @@ namespace DndHelper.Model
         public Character() : base()
         {
             Exhaustion = 0;
-            //MasteryInspiration = false;
-
-            //Equipment = new();
-            //Abilities = new();
-
         }
 
     }

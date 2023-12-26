@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
     namespace DndHelper.Model.Classes
     {
-        public class Fighter : Character
+        public class Sorcerer : Character
         {
             private Random random = new Random();
 
@@ -100,7 +100,7 @@ using System.Xml.Linq;
             }
 
 
-            public Fighter(
+            public Sorcerer(
                 Race race = null, 
                 int strengthValue = 10,
                 int dexterityValue = 10,
@@ -126,18 +126,20 @@ using System.Xml.Linq;
                 Wisdom.Value = WisdomValue + RaceWisdomBonus;
                 Charisma.Value = CharismaValue + RaceCharismaBonus;
 
-                HitPointDice = new() { Count = 1, Type = 10 };
+                HitPointDice = new() { Count = 1, Type = 6 };
                 HitPoints = HitPointDice.Type + Constitution.Modifier;
                 CurrentHitPoints = HitPoints;
                 CurrentHitPointDice = HitPointDice.Count;
-                Strength.SavingThrows.Proficient = true;
+
+                Charisma.SavingThrows.Proficient = true;
                 Constitution.SavingThrows.Proficient = true;
-                ClassCharacter = "Fighter";
+                ClassCharacter = "Sorcerer";
 
                 // Случайные навыки
                 ClassSkills = new ObservableCollection<Skill>()
                 {
-                    Strength.Athletics, Dexterity.Acrobatics, Wisdom.Perception, Wisdom.Survival, Charisma.Intimidation, Intelligence.History, Wisdom.Insight, Wisdom.AnimalHandling
+                    Charisma.Intimidation, Intelligence.Arcana, Charisma.Deception,
+                    Wisdom.Insight, Intelligence.Religion, Charisma.Persuasion
                 };
 
                 ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DndHelper.Model.Classes
 {
-    public class Cleric : Character
+    public class Paladin : Character
     {
         private Random random = new Random();
 
@@ -98,7 +98,7 @@ namespace DndHelper.Model.Classes
         }
 
 
-        public Cleric(
+        public Paladin(
             Race race = null,
             int strengthValue = 10,
             int dexterityValue = 10,
@@ -124,7 +124,7 @@ namespace DndHelper.Model.Classes
             Wisdom.Value = WisdomValue + RaceWisdomBonus;
             Charisma.Value = CharismaValue + RaceCharismaBonus;
 
-            HitPointDice = new() { Count = 1, Type = 8 };
+            HitPointDice = new() { Count = 1, Type = 10 };
             HitPoints = HitPointDice.Type + Constitution.Modifier;
             CurrentHitPoints = HitPoints;
             CurrentHitPointDice = HitPointDice.Count;
@@ -132,20 +132,18 @@ namespace DndHelper.Model.Classes
             Wisdom.SavingThrows.Proficient = true;
             Charisma.SavingThrows.Proficient = true;
 
-            ClassCharacter = "Ceric";
+            ClassCharacter = "Paladin";
 
             // Случайные навыки
             ClassSkills = new ObservableCollection<Skill>()
                 {
-                    Wisdom.Perception, Intelligence.History, Wisdom.Medicine, Wisdom.Insight, Intelligence.Religion, Charisma.Persuasion
+                    Strength.Athletics, Charisma.Intimidation, Charisma.Persuasion,
+                    Wisdom.Insight, Wisdom.Medicine, Intelligence.Religion
                 };
 
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
             ClassSkills[random.Next(0, ClassSkills.Count)].Proficient = true;
         }
-        public void LevelUpdate()
-        {
-
-        }
+       
     }
 }
