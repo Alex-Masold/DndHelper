@@ -21,7 +21,6 @@ namespace DndHelper.Model.Races
             CharismaBonus = 0;
 
             Speed = 30;
-            //Character.Charisma.Intimidation.Proficient = true;
             Traits = new()
             {
                 new Trait()

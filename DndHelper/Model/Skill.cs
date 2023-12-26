@@ -9,6 +9,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Threading;
 using DndHelper.Model.Stats;
+using DndHelper.ViewModel;
 
 namespace DndHelper.Model
 {
@@ -45,12 +46,8 @@ namespace DndHelper.Model
                     // Текст сообщения
                     TextBlock messageText = new TextBlock();
                     messageText.Text = Cast();
+                    ApplicationViewModel.Log.Add($"{Stat.Character.Name}: {messageText.Text}");
                     messageText.Padding = new Thickness(5, 10, 5, 10);
-
-                    // Кнопка для закрытия Popup
-                    Button closeButton = new Button();
-                    closeButton.Content = "Закрыть";
-                    closeButton.Click += (sender, e) => { messagePopup.IsOpen = false; };
 
                     // Добавление элементов в Border
                     popupBorder.Child = messageText;

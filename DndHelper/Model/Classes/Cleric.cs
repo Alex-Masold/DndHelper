@@ -103,6 +103,7 @@ namespace DndHelper.Model.Classes
             int charismaValue = 10) : base()
         {
             Race = race;
+            Race.Character = this;
 
             StrengthValue = strengthValue;
             DexterityValue = dexterityValue;

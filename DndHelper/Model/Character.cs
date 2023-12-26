@@ -25,27 +25,6 @@ namespace DndHelper.Model
             }
         }
 
-        private int deathSaveTrue = 0;
-        public int DeathSaveTrue
-        {
-            get { return deathSaveTrue; }
-            set
-            {
-                deathSaveTrue = value;
-                OnPropertyChanged(nameof(DeathSaveTrue));
-            }
-        }
-
-        private int deathSaveFalse = 0;
-        public int DeathSaveFalse
-        {
-            get { return deathSaveFalse; }
-            set
-            {
-                deathSaveFalse = value;
-                OnPropertyChanged(nameof(DeathSaveFalse));
-            }
-        }
 
         private int hitPoints;
         public new int HitPoints
@@ -55,17 +34,6 @@ namespace DndHelper.Model
             {
                 hitPoints = value;
                 OnPropertyChanged(nameof(HitPoints));
-            }
-        }
-
-        private int currentHitPoints;
-        public int CurrentHitPoints
-        {
-            get { return currentHitPoints; }
-            set
-            {
-                currentHitPoints = value;
-                OnPropertyChanged(nameof(CurrentHitPoints));
             }
         }
 
@@ -116,16 +84,16 @@ namespace DndHelper.Model
         //    }
         //}
 
-        //private ObservableCollection<string> abilities;
-        //public ObservableCollection<string> Abilities
-        //{
-        //    get { return abilities; }
-        //    set
-        //    {
-        //        abilities = value;
-        //        OnPropertyChanged(nameof(Abilities));
-        //    }
-        //}
+        private ObservableCollection<string> abilities;
+        public ObservableCollection<string> Abilities
+        {
+            get { return abilities; }
+            set
+            {
+                abilities = value;
+                OnPropertyChanged(nameof(Abilities));
+            }
+        }
 
         private Race race;
         public new Race Race

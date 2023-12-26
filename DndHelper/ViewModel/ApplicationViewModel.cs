@@ -9,13 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
-using DndHelper.View;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Xml.Linq;
+using System.Security.Policy;
+using DndHelper.Model.Stats;
+using System.Security.Cryptography.Xml;
 
 namespace DndHelper.ViewModel
 {
     public class ApplicationViewModel : PropPropertyChanged
     {
+        private Random Random = new();
+
         private Character selectedCharacter;
         public Character SelectedCharacter
         {
@@ -27,86 +34,111 @@ namespace DndHelper.ViewModel
             }
         }
 
-        private string searchCharacterString;
-        public string SearchCharacterString
+        private Template selectedInBattle;
+        public Template SelectedInBattle
         {
-            get { return searchCharacterString; }
+            get { return selectedInBattle; }
             set
             {
-                searchCharacterString = value;
-                OnPropertyChanged(nameof(SearchCharacterString));
-                Search();
+                selectedInBattle = value;
+                OnPropertyChanged(nameof(SelectedInBattle));
+            }
+        }
+        public ObservableCollection<Character> Characters { get; set; }
+        public ObservableCollection<Template> InBattle { get; set; }
+        public static ObservableCollection<string> Log { get; set; }
+
+        private Dice D20 = new Dice() { Count = 1, Type = 20 };
+
+        private RelayCommand initiativeCatsCommand;
+        public RelayCommand InitiativeCatsCommand
+        {
+            get
+            {
+                return initiativeCatsCommand ?? (initiativeCatsCommand = new RelayCommand(obj =>
+                {
+                    int Cast;
+                    
+                    Cast = D20.Cast();
+                    SelectedCharacter.InitiativeCats = Cast;
+                    Log.Add($"{SelectedCharacter.Name}: Бросок инициативы: Результат броска {SelectedCharacter.InitiativeCats}: {Cast} + {SelectedCharacter.Initiative}");
+                    //messageText.Text = $"{SelectedCharacter.Name}: Бросок инициативы {Cast} + {SelectedCharacter.Initiative} - {SelectedCharacter.InitiativeCats}";
+                    if (InBattle.FirstOrDefault(Character => Character.Name == SelectedCharacter.Name) == null)
+                    {
+                        InBattle.Add(SelectedCharacter);
+                    }
+                    var sortedCollection = new ObservableCollection<Template>(InBattle.OrderByDescending(character => character.InitiativeCats));
+                    InBattle.Clear();
+                    foreach (var Character in sortedCollection)
+                    {
+                        InBattle.Add(Character);
+                    }
+                }));
             }
         }
 
-        //private ObservableCollection<Character> filteredCharacters;
-        //public ObservableCollection<Character> FilteredCharacters
-        //{
-        //    get { return filteredCharacters; }
-        //    set
-        //    {
-        //        filteredCharacters = value;
-        //        OnPropertyChanged(nameof(FilteredCharacters));
-        //    }
-        //}
-        //private void Search()
-        //{
-        //    if (string.IsNullOrEmpty(SearchCharacterString))
-        //    {
-        //        FilteredCharacters = Characters;
-        //    }
-        //    else
-        //    {
-        //        FilteredCharacters = new ObservableCollection<Character>(
-        //            from character in Characters
-        //            where
-        //            character.Name.Contains(SearchCharacterString, StringComparison.OrdinalIgnoreCase)
-        //            orderby character.Name
-        //            select character
-        //            );
-        //    }
-        //}
-        
-        public ObservableCollection<Character> Characters { get; set; }
+        private RelayCommand endTurnCommand;
+        public RelayCommand EndTurnCommand
+        {
+            get
+            {
+                return endTurnCommand ?? (endTurnCommand = new RelayCommand(obj =>
+                {
+                    int Death = 10;
+                    Template temp = InBattle.First();
+                    InBattle.Remove(InBattle.First());
+                    InBattle.Add(temp);
 
-        private RelayCommand addCharacterCommand;
-        //public RelayCommand AddCharacterCommand
-        //{
-        //    get
-        //    {
-        //        return addCharacterCommand ??
-        //            (addCharacterCommand = new RelayCommand(obj =>
-        //            {
-        //                //Character character = new Character();
-        //                //Characters.Add(character);
-        //                //SelectedCharacter = character;
-        //                // Создайте экземпляр ViewModel для окна создания персонажа
-        //                CreateCharacterViewModel createCharacterViewModel = new CreateCharacterViewModel();
-
-        //                // Создайте окно и установите DataContext
-        //                CreateCharacterWindow createCharacterWindow = new CreateCharacterWindow();
-
-        //                // Установите текущее окно в качестве владельца
-        //                createCharacterWindow.Owner = Application.Current.MainWindow;
-
-        //                // Откройте окно в модальном режиме (ShowDialog)
-        //                bool? result = createCharacterWindow.ShowDialog();
-
-        //                // Если результат окна положительный (например, пользователь нажал "Создать"),
-        //                // вы можете обновить коллекцию персонажей, если это необходимо.
-        //                if (result == true)
-        //                {
-        //                    Characters.Add(createCharacterViewModel.CreateCharacter());
-        //                    SelectedCharacter = createCharacterViewModel.SelectedClass;
-        //                }
-        //            }));
-        //    }
-        //}
-
+                    var IsDead = InBattle.FirstOrDefault(Character => Character.CurrentHitPoints == 0);
+                    if (IsDead != null && IsDead == InBattle.First())
+                    {
+                        if (IsDead.IsFriend == false)
+                        {
+                            MessageBox.Show($"{IsDead.Name} мертв");
+                            InBattle.Remove(IsDead);
+                        }
+                        else
+                        {
+                            if (D20.Cast() >= Death)
+                            {
+                                IsDead.DeathSaveTrue++;
+                                Death++;
+                                if (IsDead.DeathSaveTrue == 3)
+                                {
+                                    IsDead.CurrentHitPoints = 1;
+                                    IsDead.DeathSaveTrue = 0;
+                                }
+                            }
+                            else
+                            {
+                                IsDead.DeathSaveFalse++;
+                                if (IsDead.DeathSaveFalse == 3)
+                                {
+                                    MessageBox.Show($"{IsDead.Name} умер");
+                                    InBattle.Remove(IsDead);
+                                }
+                            }
+                        }
+                    }
+                    SelectedInBattle = InBattle.First();
+                }));
+            }
+        }
         public ApplicationViewModel()
         {
             Characters = new ObservableCollection<Character>(DataContext.DataBase.Characters);
-            //FilteredCharacters = Characters;
+
+            InBattle = new ObservableCollection<Template>();
+
+            for(int i = 0; i < Random.Next(1,5); i++)
+            {
+                DataContext.DataBase.Enemies[0].InitiativeCats = D20.Cast();
+                InBattle.Add(DataContext.DataBase.Enemies[0]);
+            }
+
+            InBattle.Add(DataContext.DataBase.Enemies[1]);
+            
+            Log = new ObservableCollection<string>();
 
             SelectedCharacter = Characters.First();
         }
