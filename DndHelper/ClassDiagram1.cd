@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DndHelper.DataContext.DataBase">
+    <Position X="11" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAAwAAAAAAAAA=</HashCode>
+      <FileName>DataContext\DataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Character">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAUAAAAAAAAAAAQAABAFAAAEAAAABAAAgBABAIAE=</HashCode>
+      <FileName>Model\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Artificer">
+    <Position X="6.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Artificer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Barbarian">
+    <Position X="13.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Barbarian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Bard">
+    <Position X="18" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Bard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Cleric">
+    <Position X="22.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAyAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Cleric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Druid">
+    <Position X="27" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Druid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Fighter">
+    <Position X="2.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Fighter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Monk">
+    <Position X="9" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Monk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Paladin">
+    <Position X="15.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Paladin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Ranger">
+    <Position X="20.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Ranger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Rogue">
+    <Position X="24.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Rogue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Sorcerer">
+    <Position X="29.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Sorcerer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Warlock">
+    <Position X="4.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Warlock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Classes.Wizard">
+    <Position X="11.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAgAEJAAAAAQAAAAACAAAAAhAAEAACABAwAABAAAAA=</HashCode>
+      <FileName>Model\Classes\Wizard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.Elf">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAEAAAAAAABBAAAAAAAAACAAAACA=</HashCode>
+      <FileName>Model\Races\Elf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.Goblin">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Races\Goblin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.HalfOrc">
+    <Position X="10.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Races\HalfOrc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.HighElf">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Races\HighElf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.Race">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCIEBAAABAQAAAAABEAAAQBAAAEEQAAABAAAAAAiAA=</HashCode>
+      <FileName>Model\Races\Race.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Races.WoodElf">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Races\WoodElf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Charisma">
+    <Position X="20" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgAAAAIAAAEAAAEBAAABAAAAADAAAAAwAAAAAAQ=</HashCode>
+      <FileName>Model\Stat\Charisma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Constitution">
+    <Position X="24.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAQ=</HashCode>
+      <FileName>Model\Stat\Constitution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Dexterity">
+    <Position X="26.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgAAAAAAAAAAAAAAAAAAAAAAICEAACAhAAAAAAY=</HashCode>
+      <FileName>Model\Stat\Dexterity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Intelligence">
+    <Position X="29" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAABAQAAAAAAQAAAAEAAAAQAAAEECAABAAiAAAAAgQ=</HashCode>
+      <FileName>Model\Stat\Intelligence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Stat" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIB0AAAAEAAAAAAAAAAAQACAAEACAAAAAgAAEACAQ=</HashCode>
+      <FileName>Model\Stat\Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Strength">
+    <Position X="17.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAEAAAABAAAAAAAAAAAAAAACAAAAAgAAAAAAQ=</HashCode>
+      <FileName>Model\Stat\Strength.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.Model.Stats.Wisdom">
+    <Position X="22.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIBAAACAAAAAgAAAgAAAAAAAAAACAAAAkgAAAFCAQ=</HashCode>
+      <FileName>Model\Stat\Wisdom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DndHelper.ViewModel.ApplicationViewModel">
+    <Position X="13.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAACAAIACBAAAAgAAQQAAgAJAAAAQAAAAAAACA=</HashCode>
+      <FileName>ViewModel\ApplicationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
