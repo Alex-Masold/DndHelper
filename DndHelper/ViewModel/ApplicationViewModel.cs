@@ -132,11 +132,8 @@ namespace DndHelper.ViewModel
 
             InBattle = new ObservableCollection<Template>();
 
-            for(int i = 0; i < Random.Next(1,5); i++)
-            {
-                DataContext.DataBase.Enemies[0].InitiativeCats = D20.Cast();
-                InBattle.Add(DataContext.DataBase.Enemies[0]);
-            }
+            DataContext.DataBase.Enemies[0].InitiativeCats = D20.Cast();
+            InBattle.Add(DataContext.DataBase.Enemies[0]);
 
             InBattle.Add(DataContext.DataBase.Enemies[1]);
             
